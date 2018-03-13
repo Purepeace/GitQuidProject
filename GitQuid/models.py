@@ -8,30 +8,41 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
+    # what happens if user wants to delete his profile?
+    # models.PROTECT will preserve data in the db which imo shouldn't be the case
+    # However, projects and donation history should be preserved
+    # Anyhow, not a primary concern
     user = models.OneToOneField(User, on_delete=models.PROTECT)
-    picture = models.BinaryField(blank=True)
-    description = models.TextField(blank=True)
+    picture = models.BinaryField(null=True)
+    description = models.TextField(null=True)
     def __str__(self):
         return self.user.username
 
-class Donation(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
-    amount = models.FloatField(blank=True)
-    date = models.DateTimeField(blank=True)
-    comMaxLen = 200
-    comment = models.CharField(max_length=comMaxLen, blank=True)
-
 class Project(models.Model):
-    donation = models.ForeignKey(Donation, on_delete=models.PROTECT)
-    name = models.CharField(max_length=200, blank=True)
-    body = models.TextField(blank=True)
-    category = models.CharField(max_length=50, blank=True)
+    # ideally maybe many users (as a team, for instance) could create a many projects
+    # but keeping one user creates many projects is a bit simpler for now
+    userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
+    name = models.CharField(max_length=200)
+    body = models.TextField(null=True)
+    category = models.CharField(max_length=50)
     def __str__(self):
         return self.name
+
+class Donation(models.Model):
+    userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
+    project = models.ForeignKey(Project, on_delete=models.PROTECT)
+    amount = models.FloatField()
+    date = models.DateTimeField()
+    comMaxLen = 200
+    comment = models.CharField(max_length=comMaxLen, null=True)
+    def __str__(self):
+        return str(self.amount) + ' to ' + str(self.project) + ' at ' + str(self.date)[:16]
 
 # Table to store whatever material was uploaded to the project (picture, vids, etc.)
 # Many-to-one relation with project
 class Media(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.PROTECT)
-    tag = models.CharField(max_length=50, blank=True)
-    media = models.BinaryField(blank=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    tag = models.CharField(max_length=50)
+    media = models.BinaryField()
+    def __str__(self):
+        return self.tag

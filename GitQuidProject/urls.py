@@ -13,6 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# !!!
+# Commented everything because:
+# python manage.py sqlmigrate GitQuid 0001 can't run if some django code doesn't compile
+# Pov
+# !!!
+
+# fyi
+# path() is like url() but it doesn't use regex for matching
+# both are ok to use and does the same thing
+
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
@@ -21,10 +32,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^GitQuid/', include('GitQuid.urls')),
+    # url(r'^$', views.index, name='index'),
+    # url(r'^GitQuid/', include('GitQuid.urls')),
     # above maps any URLs starting
     # with GitQuid/ to be handled by
     # the GitQuid application
     url(r'^admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -108,3 +108,6 @@ GitQuid/migrations/
 #db
 *.sqlite3
 *.sql
+
+#macOS
+.DS_Store
