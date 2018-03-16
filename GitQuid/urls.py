@@ -17,6 +17,7 @@ urlpatterns = [
     # url(r'^category/(?P<category_name_slug>[\w\-]+)/add_project/', views.add_project, name='add_project'),
     # url(r'^signup/$',views.signup,name='signup'),
     # url(r'^login/$',views.login, name='login'),
-    # url(r'^restricted/',views.retricted,name='restricted'),
+    # url(r'^restricted/',views.restricted,name='restricted'),
     # url(r'^logout/$', views.user_logout, name='logout'),
+    url(r'^register/$', views.register, name='register'),
 ]
