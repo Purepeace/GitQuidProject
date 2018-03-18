@@ -13,8 +13,8 @@ class UserProfile(models.Model):
     # However, projects and donation history should be preserved
     # Anyhow, not a primary concern
     user = models.OneToOneField(User, on_delete=models.PROTECT)
-    picture = models.ImageField(upload_to='profile_images', null=True)
-    description = models.TextField(null=True)
+    picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     def __str__(self):
         return self.user.username
 

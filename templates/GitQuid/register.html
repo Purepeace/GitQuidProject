@@ -8,11 +8,9 @@
 {% block body_block %}
 	<h1>Register for GitQuid</h1>
 	{% if registered %}
-		<strong>thank you for registering!</strong>
-		<a href="{% url 'index' %}">Return to the homepage.</a><br />
+		<div>Thank you for registering!</div>
 	{% else %}
-		<strong>register here!</strong><br />
-		<form id="user_form" method="post" action="{% url 'register' %}"
+		<form id="user_form" method="post" action="{% url 'GitQuid:register' %}"
 			enctype="multipart/form-data">
 
 		{% csrf_token %}
