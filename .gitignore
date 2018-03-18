@@ -103,13 +103,17 @@ ENV/
 # mypy
 .mypy_cache/
 
-#pycharm
+# pycharm
 .idea/
 GitQuid/migrations/
 
-#db
+# db
 *.sqlite3
 *.sql
 
-#macOS
+# macOS
 .DS_Store
+
+# Project
+media/
+static/
