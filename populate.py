@@ -31,7 +31,7 @@ def populate():
              is_staff=True)
     u.save()
     # User sets up profile
-    up = UserProfile(id=None, user=u, picture=b"picture", description="Hi I am from Wilno")
+    up = UserProfile(id=None, user=u, picture=None, description="Hi I am from Wilno")
     up.save()
     # User creates a project
     p = Project(userProfile=up, name="Awesome project", body="Lorem Ipsum of the awesome project",
