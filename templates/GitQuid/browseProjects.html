@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'GitQuid/base.html' %}
+{% load staticfiles %}
 
-</body>
-</html>
+{% block title_block %}
+	Projects
+{% endblock %}
+
+{% block body_block %}
+	<h1>Browsing Projects</h1>
+
+    {% for project in projects %}
+        <li>
+            <h3>{{ project }}</h3>
+             >> {{ project.body }}
+        </li>
+    {% endfor %}
+
+{% endblock %}

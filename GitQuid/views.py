@@ -5,7 +5,7 @@
 # !!!
 
 from django.shortcuts import render
-# from GitQuid.models import Project
+from GitQuid.models import Project
 # from GitQuid.models import Category
 # from GitQuid.forms import CategoryForm
 # from GitQuid.forms import ProjectForm
@@ -179,6 +179,22 @@ def index(request):
 #     return render(request, 'GitQuid/add_project.html', context_dict)
 #
 #
+
+
+def browse_projects(request):
+
+    # projects = Project.objects.all()
+
+    # for project in projects:
+    #     context_dict = {'name': project.name, 'category': project.category,
+    # 'body': project.body, 'user': project.userProfile}
+
+    # Get all projects, sorting alphabetically by default
+    context_dict = {'projects': Project.objects.all().order_by("name")}
+
+    return render(request, 'GitQuid/browseProjects.html', context_dict)
+
+
 def register(request):
     # A boolean value for telling the template
     # whether the registration was successful.

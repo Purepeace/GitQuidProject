@@ -35,7 +35,11 @@ def populate():
     up.save()
     # User creates a project
     p = Project(userProfile=up, name="Awesome project", body="Lorem Ipsum of the awesome project",
-                category="Board games")
+            category="Board games")
+    Project(userProfile=up, name="Awesome project2", body="Lorem Ipsum of the awesome project2",
+            category="Board games").save()
+    Project(userProfile=up, name="Awesome project3", body="Lorem Ipsum of the awesome project3",
+            category="Board games").save()
     p.save()
     # User ads some pictures to the project
     Media(project=p, media=b"asdf", tag="picture0").save()
