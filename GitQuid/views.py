@@ -49,6 +49,10 @@ def index(request):
     return response
 
 
+def account(request):
+    response = render(request, 'GitQuid/account.html')
+    return response
+
 #
 #
 # # A helper method
