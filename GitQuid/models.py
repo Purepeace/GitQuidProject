@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # Django creates primary key automatically if not specified btw
@@ -25,11 +26,11 @@ class Project(models.Model):
     # but keeping one user creates many projects is a bit simpler for now
     userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
     name = models.CharField(max_length=200)
+    date = models.DateTimeField(default=timezone.now())
+    description = models.CharField(max_length=300, null=True)
+    title_image = models.ImageField(upload_to="title_images", null=True, blank=True)
     body = models.TextField(null=True)
     category = models.CharField(max_length=50)
-    date = models.DateField()
-    donations = models.FloatField(default=0)
-
     def __str__(self):
         return self.name
 
@@ -38,7 +39,7 @@ class Donation(models.Model):
     userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
     project = models.ForeignKey(Project, on_delete=models.PROTECT)
     amount = models.FloatField()
-    date = models.DateTimeField()
+    date = date = models.DateTimeField(default=timezone.now())
     comMaxLen = 200
     comment = models.CharField(max_length=comMaxLen, null=True)
 
