@@ -5,30 +5,30 @@
 # !!!
 
 from django.shortcuts import render
-from GitQuid.models import Project
 # from GitQuid.models import Category
 # from GitQuid.forms import CategoryForm
 # from GitQuid.forms import ProjectForm
 
 from GitQuid.forms import UserForm, UserProfileForm
-
+from GitQuid.models import *
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-# from datetime import datetime
-#
-#
-def index(request):
 
-#     request.session.set_test_cookie()
-#     category_list = Category.objects.order_by('-likes')[:5]
-#     project_list = Project.objects.order_by('-views')[:5]
-#     context_dict = {'categories': category_list, 'projects': project_list}
-#
-#     visitor_cookie_handler(request)
-#     context_dict['visits'] = request.session['visits']
+
+# from django import template
+
+
+def index(request):
+    # request.session.set_test_cookie()
+    # category_list = Category.objects.order_by('-likes')[:5]
+    # project_list = Project.objects.order_by('-views')[:5]
+    # context_dict = {'categories': category_list, 'projects': project_list}
+    #
+    # visitor_cookie_handler(request)
+    # context_dict['visits'] = request.session['visits']
     if request.method == 'POST':
         # Gather the username and password provided by the user.
         # This information is obtained from the login form.
@@ -40,17 +40,15 @@ def index(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-
-
         # Use Django's machinery to attempt to see if the username/password
         # combination is valid - a User object is returned if it is.
         user = authenticate(username=username, password=password)
         login(request, user)
 
-
-
     response = render(request, 'GitQuid/index.html')
     return response
+
+
 #
 #
 # # A helper method
@@ -181,16 +179,30 @@ def index(request):
 #
 
 
+# register = template.Library()
+#
+#
+# @register.simple_tag(takes_context=True)
 def browse_projects(request):
+    projects = Project.objects.all()
+    donations = Donation.objects.all()
 
-    # projects = Project.objects.all()
+    for project in projects:
+        donation_sum = 0
+        for donation in donations:
+            if project.name == donation.project.name:
+                donation_sum += donation.amount
+        # Update Project model with sum of donations
+        p = Project.objects.get(id=project.id)
+        p.donations = donation_sum
+        p.save()
 
-    # for project in projects:
-    #     context_dict = {'name': project.name, 'category': project.category,
-    # 'body': project.body, 'user': project.userProfile}
+    # Get parameter by which projects are going to be sorted
+    sort = request.GET.get('sort', 'name')
 
     # Get all projects, sorting alphabetically by default
-    context_dict = {'projects': Project.objects.all().order_by("name")}
+
+    context_dict = {'projects': projects.order_by(sort)}
 
     return render(request, 'GitQuid/browseProjects.html', context_dict)
 
@@ -258,6 +270,8 @@ def register(request):
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
+
+
 #
 #
 #

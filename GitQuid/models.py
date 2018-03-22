@@ -15,8 +15,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return self.user.username
+
 
 class Project(models.Model):
     # ideally maybe many users (as a team, for instance) could create a many projects
@@ -25,8 +27,12 @@ class Project(models.Model):
     name = models.CharField(max_length=200)
     body = models.TextField(null=True)
     category = models.CharField(max_length=50)
+    date = models.DateField()
+    donations = models.FloatField(default=0)
+
     def __str__(self):
         return self.name
+
 
 class Donation(models.Model):
     userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
@@ -35,8 +41,10 @@ class Donation(models.Model):
     date = models.DateTimeField()
     comMaxLen = 200
     comment = models.CharField(max_length=comMaxLen, null=True)
+
     def __str__(self):
         return str(self.amount) + ' to ' + str(self.project) + ' at ' + str(self.date)[:16]
+
 
 # Table to store whatever material was uploaded to the project (picture, vids, etc.)
 # Many-to-one relation with project
@@ -44,5 +52,6 @@ class Media(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     tag = models.CharField(max_length=50)
     media = models.BinaryField()
+
     def __str__(self):
         return self.tag
