@@ -105,7 +105,7 @@ ENV/
 
 # pycharm
 .idea/
-GitQuid/migrations/
+GitQuid/Migrations/
 
 # db
 *.sqlite3
@@ -113,6 +113,11 @@ GitQuid/migrations/
 
 # macOS
 .DS_Store
+templates/.DS_Store
+templates/GitQuid/.DS_Store
+static/.DS_Store
+static/images/.DS_Store
+
 
 # Project
 media/
