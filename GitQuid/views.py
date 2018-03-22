@@ -181,7 +181,9 @@ def show_category(request, category_name_slug):
 #     return render(request, 'GitQuid/add_project.html', context_dict)
 #
 #
-
+def view_detail(request):
+    searchWord = request.POST.get('search','')
+    return HttpResponse(searchWord)
 
 # register = template.Library()
 #
