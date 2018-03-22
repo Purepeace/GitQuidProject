@@ -7,6 +7,22 @@ from django.utils import timezone
 # Django creates primary key automatically if not specified btw
 # on_delete=models.PROTECT - Django 2.0 requires that
 
+class Category(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    views = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):  # For Python 2, use__unicode__ too
+        return self.name
+
 
 class UserProfile(models.Model):
     # what happens if user wants to delete his profile?
