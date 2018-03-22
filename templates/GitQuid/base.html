@@ -11,25 +11,40 @@
         {% endblock %}
     </title>
   </head>
-  <body>
-  <h1>GitQuid</h1>
-{% block login_block %}
-     {% if user.is_authenticated %}
-         howdy {{ user.username }}!
-         <form action="{% url 'GitQuid:logout' %}">
-             <input type="submit" value="Logout">
-         </form>
-     {% else %}
-         <li><a href="{% url 'GitQuid:register' %}">Sign Up</a></li>
-         <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
-             {% csrf_token %}
-             Username: <input type="text" name="username" value="" size="50"/> <br/>
-             Password: <input type="password" name="password" value="" size="50"/> <br/>
-             <input type="submit" value="Sign In"/>
-         </form>
-     {% endif %}
- {% endblock %}
- {% block body_block %}
-  {% endblock %}
-   </body>
+ <body>
+
+            <img id="logo" src="{% static 'images/logo.png' %}" alt="GitQuid Logo" />
+            <div id="title">GitQuid</div>
+            {% block login_block%}
+                    {% if user.is_authenticated %}
+                            Hi, {{ user.username }}!
+                            <form action="{% url 'GitQuid:logout' %}">
+                            <input id="position4" type="submit" value="Logout">
+                            </form>
+                    {% else %}
+                         <form action="{% url 'GitQuid:register' %}">
+                            <input id="position3" type="submit" value="SIGN UP">
+                         </form>
+                        <div>
+                            <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
+                            {% csrf_token %}
+                            <div id="position">Username </div>
+                            <input type="text" name="username" value="" size="50" class="tab"/> <br />
+                            <div id="position2">Password </div><br/>
+                            <input type="password" name="password" value="" size="50" class="tab" /> <br />
+                            <input type="submit" value="Sign In" />
+
+                                </form>
+                                </div>
+
+
+                    {% endif %}
+            {% endblock %}
+
+            {% block body_block %}
+            <hr>
+            {% endblock %}
+
+
+</body>
   </html>
