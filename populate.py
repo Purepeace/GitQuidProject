@@ -10,6 +10,7 @@ from GitQuid.models import *
 from django.utils import timezone
 # plain text password are not stored in db only their hashes
 from django.contrib.auth.hashers import make_password
+import datetime
 
 
 # Db setup:
@@ -35,18 +36,27 @@ def populate():
     up.save()
     # User creates a project
     p = Project(userProfile=up, name="Awesome project", body="Lorem Ipsum of the awesome project",
-            category="Board games")
-    Project(userProfile=up, name="Awesome project2", body="Lorem Ipsum of the awesome project2",
-            category="Board games").save()
-    Project(userProfile=up, name="Awesome project3", body="Lorem Ipsum of the awesome project3",
-            category="Board games").save()
+                category="Board games", date=datetime.datetime(2015, 12, 1, 23, 59))
     p.save()
+
+    p2 = Project(userProfile=up, name="Awesome project2", body="Lorem Ipsum of the awesome project2",
+                 category="Board games", date=datetime.datetime(2019, 12, 1, 23, 59))
+    p2.save()
+
+    p3 = Project(userProfile=up, name="Awesome project3", body="Lorem Ipsum of the awesome project3",
+                 category="ABoard games", date=datetime.datetime(2012, 12, 1, 23, 59))
+    p3.save()
+
     # User ads some pictures to the project
     Media(project=p, media=b"asdf", tag="picture0").save()
     Media(project=p, media=b"qwerty", tag="picture1").save()
     # User makes a donation and donation goes to a project
     d = Donation(userProfile=up, project=p, amount=123.99, date=timezone.now(), comment="Good project")
     d.save()
+    d2 = Donation(userProfile=up, project=p2, amount=419.99, date=timezone.now(), comment="Awesome project")
+    d2.save()
+    d3 = Donation(userProfile=up, project=p3, amount=1337.00, date=timezone.now(), comment="Amazing project")
+    d3.save()
 
 
 #     u = add_User("Berta", "latushk", "hi@labas.lt", None, "Hi I am from Wilno")

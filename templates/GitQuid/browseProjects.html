@@ -1,17 +1,32 @@
 {% extends 'GitQuid/base.html' %}
 {% load staticfiles %}
+{#{% load sort_extras %}#}
+
+{#<script src="{% static "js/jquery.js" %}"></script>#}
+{#<script src="{% static "js/GitQuid.js" %}"></script>#}
+
 
 {% block title_block %}
-	Projects
+    Projects
 {% endblock %}
 
 {% block body_block %}
-	<h1>Browsing Projects</h1>
+    <h1>Browsing Projects</h1>
+
+    Sort by:
+    <th><a href="{% url 'GitQuid:browse_projects' %}?sort=name">A>Z </a></th>
+    <th><a href="{% url 'GitQuid:browse_projects' %}?sort=-name">Z>A </a></th>
+    <th><a href="{% url 'GitQuid:browse_projects' %}?sort=date">Oldest first</a></th>
+    <th><a href="{% url 'GitQuid:browse_projects' %}?sort=-date">Earliest first</a></th>
+    <th><a href="{% url 'GitQuid:browse_projects' %}?sort=donations">$</a></th>
+    <th><a href="{% url 'GitQuid:browse_projects' %}?sort=-donations">$$$</a></th>
 
     {% for project in projects %}
         <li>
             <h3>{{ project }}</h3>
-             >> {{ project.body }}
+            >> {{ project.body }}
+            <small>{{ project.date }}</small>
+            {{ project.donations }}
         </li>
     {% endfor %}
 
