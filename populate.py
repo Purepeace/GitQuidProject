@@ -44,7 +44,7 @@ def populate():
     p2.save()
 
     p3 = Project(userProfile=up, name="Awesome project3", body="Lorem Ipsum of the awesome project3",
-                 category="ABoard games", date=datetime.datetime(2012, 12, 1, 23, 59))
+                 category="Board games", date=datetime.datetime(2012, 12, 1, 23, 59))
     p3.save()
 
     # User ads some pictures to the project

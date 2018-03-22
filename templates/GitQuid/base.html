@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<script src="{% static "Libraries/jquery/jquery.js" %}"></script>
-<script src="{% static "js/gitquid-jquery.js" %}"></script>
+<script src="{% static 'Libraries/jquery/jquery.js' %}"></script>
+<script src="{% static 'js/gitquid-jquery.js' %}"></script>
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
@@ -22,13 +22,12 @@
             <input id="position4" type="submit" value="Logout">
         </form>
     <form action="{% url 'GitQuid:account' %}">
-            <input type="submit" value="My Account">
+            <input type="submit" value="Account">
         </form>
     {% else %}
         <form action="{% url 'GitQuid:register' %}">
             <input id="position3" type="submit" value="SIGN UP">
         </form>
-        <div>
             <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
                 {% csrf_token %}
                 <div id="position">Username</div>
@@ -39,7 +38,7 @@
                 <input type="submit" value="Sign In"/>
 
             </form>
-        </div>
+
 
 
     {% endif %}

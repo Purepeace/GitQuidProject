@@ -9,7 +9,8 @@
 <div align=center>
 YOUR DETAILS: <br/>
 USERNAME: {{ user.username }}<br/>
-{{ user.picture }}<br/>
+<img src="{{ user.userprofile.picture.url }}" alt="User Profile Picture" width="100px"/><br/>
 EMAIL: {{ user.email }}<br/>
+    DESCRIPTION: {{ user.userprofile.description }}<br/>
 </div>
 {% endblock %}

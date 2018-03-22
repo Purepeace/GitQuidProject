@@ -18,7 +18,7 @@ class Category(models.Model):
         super(Category, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = 'Categor2ies'
+        verbose_name_plural = 'Categories'
 
     def __str__(self):  # For Python 2, use__unicode__ too
         return self.name
@@ -48,6 +48,7 @@ class Project(models.Model):
     body = models.TextField(null=True)
     category = models.CharField(max_length=50)
     donations = models.FloatField(default=0)
+
     def __str__(self):
         return self.name
 
