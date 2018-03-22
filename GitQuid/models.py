@@ -47,6 +47,7 @@ class Project(models.Model):
     title_image = models.ImageField(upload_to="title_images", null=True, blank=True)
     body = models.TextField(null=True)
     category = models.CharField(max_length=50)
+    donations = models.FloatField(default=0)
     def __str__(self):
         return self.name
 
