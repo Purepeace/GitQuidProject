@@ -6,11 +6,10 @@
 
 
 {% block body_block %}
-
-Your settings:
-
-{{ user.username }}
-{{ user.picture }}
-{{ user.email }}
-
+<div align=center>
+YOUR DETAILS: <br/>
+USERNAME: {{ user.username }}<br/>
+{{ user.picture }}<br/>
+EMAIL: {{ user.email }}<br/>
+</div>
 {% endblock %}

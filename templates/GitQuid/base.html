@@ -17,9 +17,12 @@
 <div id="title">GitQuid</div>
 {% block login_block %}
     {% if user.is_authenticated %}
-        Hi, {{ user.username }}!
+<div align="center">Hi, {{ user.username }}!</div>
         <form action="{% url 'GitQuid:logout' %}">
             <input id="position4" type="submit" value="Logout">
+        </form>
+    <form action="{% url 'GitQuid:account' %}">
+            <input type="submit" value="My Account">
         </form>
     {% else %}
         <form action="{% url 'GitQuid:register' %}">
@@ -43,7 +46,6 @@
 {% endblock %}
 
 {% block body_block %}
-    <hr>
 {% endblock %}
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
