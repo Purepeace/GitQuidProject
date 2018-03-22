@@ -36,15 +36,15 @@ def populate():
     up.save()
     # User creates a project
     p = Project(userProfile=up, name="Awesome project", body="Lorem Ipsum of the awesome project",
-                category="Board games")
+                category="Board games", date=datetime.datetime(2015, 12, 1, 23, 59))
     p.save()
 
     p2 = Project(userProfile=up, name="Awesome project2", body="Lorem Ipsum of the awesome project2",
-                 category="Board games")
+                 category="Board games", date=datetime.datetime(2019, 12, 1, 23, 59))
     p2.save()
 
     p3 = Project(userProfile=up, name="Awesome project3", body="Lorem Ipsum of the awesome project3",
-                 category="ABoard games")
+                 category="ABoard games", date=datetime.datetime(2012, 12, 1, 23, 59))
     p3.save()
 
     # User ads some pictures to the project
