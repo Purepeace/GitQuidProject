@@ -1,11 +1,13 @@
-<!DOCTYPE html>
 {% load staticfiles %}
-{#<script src="{% static "js/Libraries/jquery.js" %}"></script>#}
-{#<script src="{% static "js/GitQuid.js" %}"></script>#}
+<!DOCTYPE html>
+{#<script src="{% static 'js/Libraries/jquery.js' %}"></script>#}
+{#<script src="{% static 'js/GitQuid.js' %}"></script>#}
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>
         {% block title_block %}
         {% endblock %}
@@ -20,6 +22,8 @@
                             Hi, {{ user.username }}!
                             <form action="{% url 'GitQuid:logout' %}">
                             <input id="position4" type="submit" value="Logout">
+                                <form action="{% url 'GitQuid:account' %}">
+                            <input type="submit" value="My Account">
                             </form>
                     {% else %}
                          <form action="{% url 'GitQuid:register' %}">
@@ -37,12 +41,13 @@
                                 </form>
                                 </div>
 
+        <hr>
+
 
                     {% endif %}
             {% endblock %}
 
             {% block body_block %}
-            <hr>
             {% endblock %}
 
 

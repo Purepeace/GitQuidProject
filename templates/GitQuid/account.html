@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'GitQuid/base.html' %}
+{% load staticfiles %}
 
-</body>
-</html>
+{% block title_block %}
+{% endblock %}
+
+
+{% block body_block %}
+
+Your settings:
+
+{{ user.username }}
+{{ user.picture }}
+{{ user.email }}
+
+{% endblock %}
