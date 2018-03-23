@@ -7,11 +7,12 @@
 
 {% block body_block %}
 
-        <div align="center">
-            ADD NEW PROJECT HERE <br/> <br/> <br/>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" name="submit" value="SUBMIT" id="position9"/>
-    </form>
-        </div>
+    <div align="center">
+        ADD NEW PROJECT HERE <br/> <br/> <br/>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="submit" value="SUBMIT" id="position9"/>
+        </form>
+    </div>
+
 {% endblock %}

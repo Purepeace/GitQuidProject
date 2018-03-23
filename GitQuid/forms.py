@@ -4,17 +4,17 @@ from GitQuid.models import UserProfile, Category, Project
 
 
 class CategoryForm(forms.ModelForm):
-    name= forms.CharField(max_length=128,
-                          help_text="Please enter the category name." )
-    views =forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    likes =forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    name = forms.CharField(max_length=128,
+                           help_text="Please enter the category name.")
+    views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    likes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     # An inline class to provide additional information on the form.
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Category
-        fields =('name',)
+        fields = ('name',)
 
 
 class UserForm(forms.ModelForm):
@@ -51,6 +51,4 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
-        fields = ('name', 'userProfile', 'date', 'title_image', 'body', 'donations')
-
-
+        fields = ('name', 'category', 'title_image', 'body')
