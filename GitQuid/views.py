@@ -52,7 +52,6 @@ def index(request):
     return response
 
 
-
 def account(request):
     response = render(request, 'GitQuid/account.html')
     return response
@@ -170,25 +169,29 @@ def show_category(request, category_name_slug):
 
 def add_project(request):
 
-     if request.method == "POST":
+    if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.published_date = timezone.now()
+
             post.save()
             return redirect('/GitQuid/projects/')
-     else:
+    else:
         form = ProjectForm()
-        context_dict = {'form': form}
+        category = Category.objects.all()
+        context_dict = {'form': form, 'categories': category}
 
-     return render(request, 'GitQuid/add_project.html', context_dict)
+    return render(request, 'GitQuid/add_project.html', context_dict)
+
 
 #
 #
-def view_detail(request):
-    searchWord = request.POST.get('search','')
-    return HttpResponse(searchWord)
+# def view_detail(request):
+#     searchWord = request.POST.get('search', '')
+#     return HttpResponse(searchWord)
+
 
 # register = template.Library()
 #
