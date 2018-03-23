@@ -1,14 +1,6 @@
 body {
     background-color: #F5EDD4
 }
-.boxed {
-  border: 1px solid green ;
-}
-
-.wrapper{
-    margin-top:150px
-
-}
 
 #logo {
     position: absolute;

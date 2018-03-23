@@ -40,9 +40,7 @@ class UserProfile(models.Model):
 class Project(models.Model):
     # ideally maybe many users (as a team, for instance) could create a many projects
     # but keeping one user creates many projects is a bit simpler for now
-
-    # null=True shouldn't be here. Something is broken with user detection in add_project view
-    userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT, null=True)
+    userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
     name = models.CharField(max_length=200)
     date = models.DateTimeField(default=timezone.now())
     description = models.CharField(max_length=300, null=True)
@@ -51,6 +49,7 @@ class Project(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # for internal use only. Sum of all donations to this project
     donations = models.FloatField(default=0)
+
 
     def __str__(self):
         return self.name
