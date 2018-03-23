@@ -45,8 +45,11 @@ def index(request):
 
         # Use Django's machinery to attempt to see if the username/password
         # combination is valid - a User object is returned if it is.
+
         user = authenticate(username=username, password=password)
-        login(request, user)
+        if user:
+            if user.is_active:
+                login(request, user)
 
     response = render(request, 'GitQuid/index.html')
     return response
@@ -60,6 +63,7 @@ def account(request):
 def projectPage(request):
     response = render(request, 'GitQuid/projectPage.html')
     return response
+
 
 #
 #
@@ -168,7 +172,6 @@ def show_category(request, category_name_slug):
 #
 
 def add_project(request):
-
     if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
@@ -303,4 +306,3 @@ def user_logout(request):
 #
 #
 #
-
