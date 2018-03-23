@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^register/$', views.register, name='register'),
     url(r'^projects/$', views.browse_projects, name='browse_projects'),
     url(r'^add_project/$', views.add_project, name='add_project'),
+    url(r'^projectPage/$', views.projectPage, name='projectPage'),
 
 ]

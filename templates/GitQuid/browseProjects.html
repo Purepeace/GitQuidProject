@@ -67,16 +67,18 @@
         {% for project in projects %}
             <li>
                 <h3>{{ project }}</h3>
-                >> {{ project.body }}
+                 {{ project.body }}
                 <small>{{ project.date }}</small>
                 {{ project.donations }}
+                <br/>
             </li>
         {% endfor %}
+        <!-- 
  <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <button class="btn btn-primary" id="about-btn">
             qqqq
         </button>
-        <button class="btn btn-primary" id="aaaa">
+       <button class="btn btn-primary" id="aaaa">
             Click Me - I'm JavaScript on Speed
         </button>
  </div>
@@ -93,5 +95,5 @@
         </div>
 
         {#    <div data-message="world" onclick={ handler }>Say hello</div>#}
-    </div>
+    </div> -->
 {% endblock %}

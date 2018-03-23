@@ -57,6 +57,11 @@ def account(request):
     response = render(request, 'GitQuid/account.html')
     return response
 
+
+def projectPage(request):
+    response = render(request, 'GitQuid/projectPage.html')
+    return response
+
 #
 #
 # # A helper method

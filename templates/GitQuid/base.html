@@ -13,8 +13,11 @@
 <body>
 
 <header>
-    <img id="logo" src="{% static 'images/logo.png' %}" alt="GitQuid Logo"/>
+    <a href="/GitQuid/">
+    <img id="logo" src="{% static 'images/logo.png' %}" alt="GitQuid Logo" />
+
     <div id="title">GitQuid</div>
+    </a>
     <form action="{% url 'GitQuid:browse_projects' %}">
                 <input type="submit" value="BROWSE PROJECTS" id="position7">
             </form>
