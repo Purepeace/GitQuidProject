@@ -34,17 +34,50 @@ def populate():
     # User sets up profile
     up = UserProfile(id=None, user=u, picture=None, description="Hello i am the superuser")
     up.save()
+
+    # Create categories
+    c = Category(name="Art", views="100", likes="16")
+    c.save()
+    c2 = Category(name="Comics", views="201", likes="26")
+    c2.save()
+    c3 = Category(name="Crafts", views="100", likes="16")
+    c3.save()
+    c4 = Category(name="Dance", views="100", likes="16")
+    c4.save()
+    c5 = Category(name="Design", views="201", likes="26")
+    c5.save()
+    c6 = Category(name="Fashion", views="100", likes="16")
+    c6.save()
+    c7 = Category(name="Film & Video", views="100", likes="16")
+    c7.save()
+    c8 = Category(name="Food", views="201", likes="26")
+    c8.save()
+    c9 = Category(name="Games", views="100", likes="16")
+    c9.save()
+    c10 = Category(name="Journalism", views="100", likes="16")
+    c10.save()
+    c11 = Category(name="Music", views="50", likes="5")
+    c11.save()
+    c12 = Category(name="Photography", views="100", likes="16")
+    c12.save()
+    c13 = Category(name="Publishing", views="100", likes="16")
+    c13.save()
+    c14 = Category(name="Technology", views="201", likes="26")
+    c14.save()
+    c15 = Category(name="Theatre", views="100", likes="16")
+    c15.save()
+
     # User creates a project
     p = Project(userProfile=up, name="Awesome project", body="Lorem Ipsum of the awesome project",
-                category="Board games", date=datetime.datetime(2015, 12, 1, 23, 59))
+                category=c, date=datetime.datetime(2015, 12, 1, 23, 59))
     p.save()
 
     p2 = Project(userProfile=up, name="Awesome project2", body="Lorem Ipsum of the awesome project2",
-                 category="Board games", date=datetime.datetime(2019, 12, 1, 23, 59))
+                 category=c2, date=datetime.datetime(2019, 12, 1, 23, 59))
     p2.save()
 
     p3 = Project(userProfile=up, name="Awesome project3", body="Lorem Ipsum of the awesome project3",
-                 category="Board games", date=datetime.datetime(2012, 12, 1, 23, 59))
+                 category=c3, date=datetime.datetime(2012, 12, 1, 23, 59))
     p3.save()
 
     # User ads some pictures to the project
@@ -57,7 +90,6 @@ def populate():
     d2.save()
     d3 = Donation(userProfile=up, project=p3, amount=1337.00, date=timezone.now(), comment="Amazing project")
     d3.save()
-
 
 
 #     u = add_User("Berta", "latushk", "hi@labas.lt", None, "Hi I am from Wilno")
