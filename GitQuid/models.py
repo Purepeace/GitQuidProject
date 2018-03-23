@@ -46,8 +46,10 @@ class Project(models.Model):
     description = models.CharField(max_length=300, null=True)
     title_image = models.ImageField(upload_to="title_images", null=True, blank=True)
     body = models.TextField(null=True)
-    category = models.CharField(max_length=50)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    # for internal use only. Sum of all donations to this project
     donations = models.FloatField(default=0)
+
 
     def __str__(self):
         return self.name
@@ -57,7 +59,7 @@ class Donation(models.Model):
     userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
     project = models.ForeignKey(Project, on_delete=models.PROTECT)
     amount = models.FloatField()
-    date = date = models.DateTimeField(default=timezone.now())
+    date = models.DateTimeField(default=timezone.now())
     comMaxLen = 200
     comment = models.CharField(max_length=comMaxLen, null=True)
 
