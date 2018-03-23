@@ -172,16 +172,18 @@ def add_project(request):
     if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-
-            post.save()
+            p = form.save(commit=False)
+            p.UserProfile = request.user
+            p.published_date = timezone.now()
+            p.save()
             return redirect('/GitQuid/projects/')
+        else:
+            print(form.errors)
     else:
+
         form = ProjectForm()
-        category = Category.objects.all()
-        context_dict = {'form': form, 'categories': category}
+        categories = Category.objects.all()
+        context_dict = {'form': form, 'categories': categories}
 
     return render(request, 'GitQuid/add_project.html', context_dict)
 
