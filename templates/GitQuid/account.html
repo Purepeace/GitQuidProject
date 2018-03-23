@@ -9,7 +9,9 @@
 <div align=center>
 YOUR DETAILS: <br/>
 USERNAME: {{ user.username }}<br/>
-<img src="{{ user.userprofile.picture.url }}" alt="User Profile Picture" width="100px"/><br/>
+    {% if user.userprofile.picture.url != null %}
+    <img src="{{ user.userprofile.picture.url }}" alt="User Profile Picture" width="100px"/><br/>
+    {% endif %}
 EMAIL: {{ user.email }}<br/>
     DESCRIPTION: {{ user.userprofile.description }}<br/>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<script src="{% static "Libraries/jquery/jquery.js" %}"></script>
-<script src="{% static "js/gitquid-jquery.js" %}"></script>
+<script src="{% static 'Libraries/jquery/jquery.js' %}"></script>
+<script src="{% static 'js/gitquid-jquery.js' %}"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,21 +15,30 @@
 <header>
     <img id="logo" src="{% static 'images/logo.png' %}" alt="GitQuid Logo"/>
     <div id="title">GitQuid</div>
+    <form action="{% url 'GitQuid:browse_projects' %}">
+                <input type="submit" value="BROWSE PROJECTS" id="position7">
+            </form>
+
     {% block login_block %}
 
         {% if user.is_authenticated %}
             <div align="center">Hi, {{ user.username }}!</div>
             <form action="{% url 'GitQuid:logout' %}">
-                <input id="position4" type="submit" value="Logout">
+                <input type="submit" value="LOGOUT" id="position8">
             </form>
-            <form action="{% url 'GitQuid:account' %}">
-                <input type="submit" value="My Account">
+            <form action="{% url 'GitQuid:account' %}" >
+                <input type="submit" value="MY ACCOUNT" id="position6">
+            </form>
+
+        <form action="{% url 'GitQuid:add_project' %}">
+                <input type="submit" value="ADD PROJECT" id="position5">
             </form>
         {% else %}
+            <div>
             <form action="{% url 'GitQuid:register' %}">
                 <input id="position3" type="submit" value="SIGN UP">
             </form>
-            <div>
+
                 <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
                     {% csrf_token %}
                     <div id="position">Username</div>

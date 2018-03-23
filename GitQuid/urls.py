@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^register/$', views.register, name='register'),
     url(r'^projects/$', views.browse_projects, name='browse_projects'),
+    url(r'^add_project/$', views.add_project, name='add_project'),
 
 ]

@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.models import User
-from GitQuid.models import UserProfile, Category
+from django.contrib.auth.models import *
+from GitQuid.models import UserProfile, Category, Project
+
 
 class CategoryForm(forms.ModelForm):
     name= forms.CharField(max_length=128,
@@ -14,6 +15,7 @@ class CategoryForm(forms.ModelForm):
         # Provide an association between the ModelForm and a model
         model = Category
         fields =('name',)
+
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -38,7 +40,17 @@ class UserForm(forms.ModelForm):
                 "password and confirm_password does not match"
             )
 
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('picture', 'description')
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        # Provide an association between the ModelForm and a model
+        model = Project
+        fields = ('name', 'userProfile', 'date', 'title_image', 'body', 'donations')
+
+

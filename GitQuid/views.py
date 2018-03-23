@@ -4,12 +4,12 @@
 # Pov
 # !!!
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from GitQuid.models import Category
 from GitQuid.forms import CategoryForm
 # from GitQuid.forms import ProjectForm
 
-from GitQuid.forms import UserForm, UserProfileForm
+from GitQuid.forms import UserForm, UserProfileForm, ProjectForm
 from GitQuid.models import *
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
@@ -40,6 +40,9 @@ def index(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        category_list = Category.objects.order_by('-likes')[:5]
+        context_dict = {'categories': category_list}
+
         # Use Django's machinery to attempt to see if the username/password
         # combination is valid - a User object is returned if it is.
         user = authenticate(username=username, password=password)
@@ -47,6 +50,7 @@ def index(request):
 
     response = render(request, 'GitQuid/index.html')
     return response
+
 
 
 def account(request):
@@ -158,27 +162,23 @@ def show_category(request, category_name_slug):
 #     return render(request, 'GitQuid/add_category.html', {'form': form})
 #
 #
-# def add_project(request, category_name_slug):
-#     try:
-#         category = Category.objects.get(slug=category_name_slug)
-#     except Category.DoesNotExist:
-#         category = None
-#
-#     form = ProjectForm()
-#     if request.method == 'POST':
-#         form = ProjectForm(request.POST)
-#         if form.is_valid():
-#             if category:
-#                 project = form.save(commit=False)
-#                 project.category = category
-#                 project.views = 0
-#                 project.save()
-#                 return show_category(request, category_name_slug)
-#             else:
-#                 print(form.errors)
-#
-#     context_dict = {'form': form, 'category': category}
-#     return render(request, 'GitQuid/add_project.html', context_dict)
+
+def add_project(request):
+
+     if request.method == "POST":
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('/GitQuid/projects/')
+     else:
+        form = ProjectForm()
+        context_dict = {'form': form}
+
+     return render(request, 'GitQuid/add_project.html', context_dict)
+
 #
 #
 def view_detail(request):

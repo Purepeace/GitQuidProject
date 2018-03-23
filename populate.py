@@ -32,7 +32,7 @@ def populate():
              is_staff=True)
     u.save()
     # User sets up profile
-    up = UserProfile(id=None, user=u, picture=None, description="Hi I am from Wilno")
+    up = UserProfile(id=None, user=u, picture=None, description="Hello i am the superuser")
     up.save()
     # User creates a project
     p = Project(userProfile=up, name="Awesome project", body="Lorem Ipsum of the awesome project",
@@ -57,6 +57,7 @@ def populate():
     d2.save()
     d3 = Donation(userProfile=up, project=p3, amount=1337.00, date=timezone.now(), comment="Amazing project")
     d3.save()
+
 
 
 #     u = add_User("Berta", "latushk", "hi@labas.lt", None, "Hi I am from Wilno")
