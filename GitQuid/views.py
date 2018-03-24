@@ -45,12 +45,14 @@ def index(request):
 
         # Use Django's machinery to attempt to see if the username/password
         # combination is valid - a User object is returned if it is.
+
         user = authenticate(username=username, password=password)
-        login(request, user)
+        if user:
+            if user.is_active:
+                login(request, user)
 
     response = render(request, 'GitQuid/index.html')
     return response
-
 
 
 def account(request):
@@ -61,6 +63,7 @@ def account(request):
 def projectPage(request):
     response = render(request, 'GitQuid/projectPage.html')
     return response
+
 
 #
 #
@@ -169,26 +172,31 @@ def show_category(request, category_name_slug):
 #
 
 def add_project(request):
-
-     if request.method == "POST":
+    if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
+            p = form.save(commit=False)
+            p.UserProfile = request.user
+            p.published_date = timezone.now()
+            p.save()
             return redirect('/GitQuid/projects/')
-     else:
+        else:
+            print(form.errors)
+    else:
+
         form = ProjectForm()
-        context_dict = {'form': form}
+        categories = Category.objects.all()
+        context_dict = {'form': form, 'categories': categories}
 
-     return render(request, 'GitQuid/add_project.html', context_dict)
+    return render(request, 'GitQuid/add_project.html', context_dict)
+
 
 #
 #
-def view_detail(request):
-    searchWord = request.POST.get('search','')
-    return HttpResponse(searchWord)
+# def view_detail(request):
+#     searchWord = request.POST.get('search', '')
+#     return HttpResponse(searchWord)
+
 
 # register = template.Library()
 #
@@ -298,4 +306,3 @@ def user_logout(request):
 #
 #
 #
-

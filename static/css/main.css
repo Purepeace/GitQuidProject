@@ -2,6 +2,15 @@ body {
     background-color: #F5EDD4
 }
 
+.boxed {
+    border: 1px solid green;
+}
+
+.wrapper {
+    margin-top: 200px
+
+}
+
 #logo {
     position: absolute;
     top: 1px;
@@ -20,10 +29,14 @@ body {
 }
 
 #login_form {
-     position: fixed;
+    position: fixed;
     top: 40px;
-    left: 1050px;
+    right: 40px;
 
+}
+
+#post_form{
+    margin-top: 200px
 }
 
 .tab {
@@ -39,10 +52,10 @@ body {
 }
 
 input[type=submit] {
-    width: 70px;
-    position: absolute;
-    left: 191px;
-    top: 95px;
+    /*width: 70px;*/
+    /*position: absolute;*/
+    /*left: 191px;*/
+    /*top: 95px;*/
     background: #09c;
     color: #fff;
     font-family: tahoma, geneva, algerian;
@@ -54,26 +67,36 @@ input[type=submit] {
 }
 
 #position {
-    position: absolute;
-    top: -10px;
-    left: 0px;
+    position: fixed;
+    top: 25px;
+    right: 210px;
     font-family: Courier New;
 
 }
 
 #position2 {
-    position: absolute;
-    top: 40px;
-    left: 0px;
+    position: fixed;
+    top: 85px;
+    right: 210px;
     font-family: Courier New;
 
 }
 
-#position3 {
-    width: 170px;
-    position: absolute;
-    top: 135px;
-    left: 1050px;
+#signin{
+    position: fixed;
+    top: 140px;
+    right: 180px;
+    font-family: Courier New;
+}
+
+#signup {
+    /*width: 170px;*/
+    /*position: absolute;*/
+    /*top: 135px;*/
+    /*left: 1050px;*/
+    position:fixed;
+    top:140px;
+    right:60px;
 
 }
 
@@ -95,6 +118,7 @@ hr {
     border-style: inset;
     border-width: 1px;
 }
+
 #position5 {
 
     width: 170px;
@@ -103,6 +127,7 @@ hr {
     left: 190px;
 
 }
+
 #position6 {
 
     width: 170px;
@@ -111,6 +136,7 @@ hr {
     left: 190px;
 
 }
+
 #position7 {
 
     width: 250px;
@@ -120,19 +146,28 @@ hr {
     font-size: 20px;
 
 }
+
 #position8 {
 
-   width: 170px;
+    width: 170px;
     position: absolute;
     top: 70px;
     left: 190px;
 
 }
-#position9 {
 
-   width: 170px;
-    position: absolute;
-    top: 650px;
-    left: 620px;
+#position9 {
+    /*align: center*/
+    /*text-align: center;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*display: block;*/
+    /*margin: 0 auto;*/
+    width: 170px;
+    position: relative;
+
+    /*top: 650px;*/
+    /*right: -10px*/
+    /*left: 20px;*/
 
 }

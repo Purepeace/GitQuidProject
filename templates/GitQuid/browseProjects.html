@@ -11,89 +11,102 @@
 {% endblock %}
 
 {% block body_block %}
-    <div align="center">
+    <div align="center" class="wrapper">
         <h1>Browsing Projects</h1>
         {#    <div class="container-fluid"></div>#}
         Sort by:
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <th><a class="btn btn-primary" id="A>Z" href="{% url 'GitQuid:browse_projects' %}?sort=name">A>Z </a></th>
-                <th><a class="btn btn-primary" id="Z>A" href="{% url 'GitQuid:browse_projects' %}?sort=-name">Z>A </a></th>
-                <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=date">Oldest first</a></th>
-                <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=-date">Earliest first</a></th>
-                <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=donations">£</a></th>
-                <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=-donations">£££</a></th>
-            </div>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=name">A>Z </a></th>
+            <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=-name">Z>A </a></th>
+            <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=date">Oldest first</a></th>
+            <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=-date">Earliest first</a></th>
+            <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=donations">£</a></th>
+            <th><a class="btn btn-primary" href="{% url 'GitQuid:browse_projects' %}?sort=-donations">£££</a></th>
+        </div>
 
 
-{#                <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
-{#                    <label class="btn btn-primary active">#}
-{#                        <th><a type="radio" href="{% url 'GitQuid:browse_projects' %}?sort=name"></a></th>A>Z#}
-{#                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active#}
-{#                    </label>#}
-{#                    <label class="btn btn-primary">#}
-{#                        <th><a type="radio" href="{% url 'GitQuid:browse_projects' %}?sort=-name"></a></th>Z>A#}
-{#                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio#}
-{#                    </label>#}
-{#                    <label class="btn btn-primary">#}
-{#                        <th><a type="radio" href="{% url 'GitQuid:browse_projects' %}?sort=date">Oldest first</a></th>#}
-{#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
-{#                    </label>#}
-{#                    <label class="btn btn-primary">#}
-{#                        <th><a href="{% url 'GitQuid:browse_projects' %}?sort=-date">Oldest first</a></th>#}
-{#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
-{#                    </label>#}
-{#                    <label class="btn btn-primary">#}
-{#                        <th><a href="{% url 'GitQuid:browse_projects' %}?sort=donations">Oldest first</a></th>#}
-{#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
-{#                    </label>#}
-{#                    <label class="btn btn-primary">#}
-{#                        <th ><a href="{% url 'GitQuid:browse_projects' %}?sort=-donations">Oldest first</a></th>#}
-{#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
-{#                    </label>#}
-{#                </div>#}
+        {#                <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
+        {#                    <label class="btn btn-primary active">#}
+        {#                        <th><a type="radio" href="{% url 'GitQuid:browse_projects' %}?sort=name"></a></th>A>Z#}
+        {#                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active#}
+        {#                    </label>#}
+        {#                    <label class="btn btn-primary">#}
+        {#                        <th><a type="radio" href="{% url 'GitQuid:browse_projects' %}?sort=-name"></a></th>Z>A#}
+        {#                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio#}
+        {#                    </label>#}
+        {#                    <label class="btn btn-primary">#}
+        {#                        <th><a type="radio" href="{% url 'GitQuid:browse_projects' %}?sort=date">Oldest first</a></th>#}
+        {#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
+        {#                    </label>#}
+        {#                    <label class="btn btn-primary">#}
+        {#                        <th><a href="{% url 'GitQuid:browse_projects' %}?sort=-date">Oldest first</a></th>#}
+        {#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
+        {#                    </label>#}
+        {#                    <label class="btn btn-primary">#}
+        {#                        <th><a href="{% url 'GitQuid:browse_projects' %}?sort=donations">Oldest first</a></th>#}
+        {#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
+        {#                    </label>#}
+        {#                    <label class="btn btn-primary">#}
+        {#                        <th ><a href="{% url 'GitQuid:browse_projects' %}?sort=-donations">Oldest first</a></th>#}
+        {#                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
+        {#                    </label>#}
+        {#                </div>#}
 
-{#        <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
-{#            <label class="btn btn-secondary active">#}
-{#                <input type="radio" name="options" id="option1" autocomplete="off" checked> Active#}
-{#            </label>#}
-{#            <label class="btn btn-secondary">#}
-{#                <input type="radio" name="options" id="option2" autocomplete="off"> Radio#}
-{#            </label>#}
-{#            <label class="btn btn-secondary">#}
-{#                <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
-{#            </label>#}
-{#        </div>#}
+        {#        <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
+        {#            <label class="btn btn-secondary active">#}
+        {#                <input type="radio" name="options" id="option1" autocomplete="off" checked> Active#}
+        {#            </label>#}
+        {#            <label class="btn btn-secondary">#}
+        {#                <input type="radio" name="options" id="option2" autocomplete="off"> Radio#}
+        {#            </label>#}
+        {#            <label class="btn btn-secondary">#}
+        {#                <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
+        {#            </label>#}
+        {#        </div>#}
 
         {% for project in projects %}
             <li>
                 <h3>{{ project }}</h3>
-                 {{ project.body }}
-                <small>{{ project.date }}</small>
-                {{ project.donations }}
-                <br/>
+{#                <div class="boxed">#}
+                    {{ project.body }}
+                    <small>{{ project.date }}</small>
+                    £{{ project.donations }}
+                    Category: {{ project.category }}
+{#                </div>#}
             </li>
         {% endfor %}
-        <!--
- <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <button class="btn btn-primary" id="about-btn">
-            qqqq
-        </button>
-       <button class="btn btn-primary" id="aaaa">
-            Click Me - I'm JavaScript on Speed
-        </button>
- </div>
-        <p>This is a example</p>
-        <p>This is another example</p>
 
-        <div>
-            <form action="{% url 'GitQuid:browse_projects' %}" method="post">
-                {% csrf_token %}
-                <input id="search" name="search" type="button" class="btn btn-primary"
-                       placeholder="Search..." value="sort">
-                {#                <input class="btn btn-primary" type="button" value="submit">#}
-            </form>
-        </div>
+{#    {{ form.color }}#}
+    </div>
+    {#        <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
+    {#            <button class="btn btn-primary" id="about-btn">#}
+    {#                qqqq#}
+    {#            </button>#}
+    {#            <button class="btn btn-primary" id="aaaa">#}
+    {#                Click Me - I'm JavaScript on Speed#}
+    {#            </button>#}
+    {#        </div>#}
+    {#        <p>This is a example</p>#}
+    {#        <p>This is another example</p>#}
+    {##}
+    {#        <div>#}
+    {#            <form action="{% url 'GitQuid:browse_projects' %}" method="post">#}
+    {#                {% csrf_token %}#}
+    {#                <input id="search" name="search" type="button" class="btn btn-primary"#}
+    {#                       placeholder="Search..." value="sort">#}
+    {#                <input class="btn btn-primary" type="button" value="submit">#}
+    {#            </form>#}
+    {#        </div>#}
+    {##}
+    {#    <div data-message="world" onclick={ handler }>Say hello</div>#}
+    {##}
+    {#        <form method="post" id="test">#}
+    {#            <input type="hidden" value="video34"/>#}
+    {#            <input type="submit" value="Test button"/>#}
+    {##}
+    {#            <div id="message">Initial text</div>#}
+    {#        </form>#}
+    {#        <input type="submit" value="test" id="test"/>#}
 
-        {#    <div data-message="world" onclick={ handler }>Say hello</div>#}
-    </div> -->
+
 {% endblock %}
