@@ -51,6 +51,6 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
-        fields = ('name', 'userProfile', 'date', 'title_image', 'body', 'donations')
+        fields = ('name', 'userProfile', 'date', 'title_image', 'body')
 
 
