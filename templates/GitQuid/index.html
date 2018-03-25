@@ -58,7 +58,7 @@
               <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' %}">Projects</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Categories</a>
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up Here</a>
             </li>
           </ul>
         </div>
@@ -116,9 +116,6 @@
             </form>
         {% else %}
             <div>
-                <form action="{% url 'GitQuid:register' %}">
-                    <input class="tab" id="signup" type="submit" value="SIGN UP">
-                </form>
 
                 <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
                     {% csrf_token %}

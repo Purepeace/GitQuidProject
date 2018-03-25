@@ -198,7 +198,7 @@ def addProject(request):
             p.user_id = request.user.id
             p.published_date = timezone.now()
             p.save()
-            return redirect('/GitQuid/projects/')
+            return redirect('/GitQuid/browseProjects/')
         else:
             print(form.errors)
     else:
