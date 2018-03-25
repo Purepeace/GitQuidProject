@@ -170,12 +170,8 @@ def show_category(request, category_name_slug):
 #     return render(request, 'GitQuid/add_category.html', {'form': form})
 #
 #
-
+@login_required
 def add_project(request):
-
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('register'))
-
     if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
@@ -187,7 +183,6 @@ def add_project(request):
         else:
             print(form.errors)
     else:
-
         form = ProjectForm()
         categories = Category.objects.all()
         context_dict = {'form': form, 'categories': categories}
