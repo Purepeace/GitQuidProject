@@ -60,6 +60,10 @@ def account(request):
     response = render(request, 'GitQuid/account.html')
     return response
 
+def about(request):
+    response = render(request, 'GitQuid/about.html')
+    return response
+
 
 def projectPage(request, slug):
     context_dic = {'project': None, 'donations': None, 'author': False, 'leftToGoal': 0.0, 'percentCollected': 0.0}

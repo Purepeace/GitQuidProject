@@ -35,7 +35,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^GitQuid/', include('GitQuid.urls')),
+    url(r'^/GitQuid/', include('GitQuid.urls')),
     # above maps any URLs starting
     # with GitQuid/ to be handled by
     # the GitQuid application

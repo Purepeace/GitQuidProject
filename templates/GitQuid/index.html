@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends 'GitQuid/base.html' %}
 {% load staticfiles %}
   <head>
@@ -48,19 +46,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:index' %}">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="about.html">About</a>
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:about' %}">About</a>
             </li>
             <li class="nav-item px-lg-4">
 
-              <a class="nav-link text-uppercase text-expanded" href="browseProjects.html">Projects</a>
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' %}">Projects</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="register.html">Categories</a>
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Categories</a>
             </li>
           </ul>
         </div>

@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+              <a class="nav-link text-uppercase text-expanded" href="GitQuid/index.html">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -49,8 +49,9 @@
               <a class="nav-link text-uppercase text-expanded" href="about.html">About</a>
             </li>
             <li class="nav-item px-lg-4">
-
-              <a class="nav-link text-uppercase text-expanded" href="browseProjects.html">Projects</a>
+              <form action="{% url 'GitQuid:browseProjects' %}">
+                <input type="submit" value="Projects" id="position5">
+            </form>
             </li>
             <li class="nav-item px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="register.html">Categories</a>
