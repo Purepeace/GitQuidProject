@@ -31,6 +31,8 @@ from GitQuid import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+# Run "python manage.py collectstatic" because of the markdownx module"
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^GitQuid/', include('GitQuid.urls')),
@@ -38,4 +40,6 @@ urlpatterns = [
     # with GitQuid/ to be handled by
     # the GitQuid application
     url(r'^admin/', admin.site.urls),
+    url(r'^markdownx/', include('markdownx.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

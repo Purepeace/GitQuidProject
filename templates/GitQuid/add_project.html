@@ -1,4 +1,4 @@
-{% extends 'GitQuid/base.html' %}
+{#{% extends 'GitQuid/base.html' %}#}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -6,14 +6,15 @@
 {% endblock %}
 
 {% block body_block %}
-
-    <div align="center">
+{#align= is no longer supported in HTML 5. Use css instead#}
+    <div>
         ADD NEW PROJECT HERE
         <div></div>
         <form id="post_form" method="POST" class="post-form">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" name="submit" value="SUBMIT" id="position9"/>
+            {{ form.as_p}}
+            <input type="submit" placeholder="submit" title="Just Do It" value="SUBMIT" id="position9"/>
         </form>
+        {{ form.media }}
     </div>
 
 {% endblock %}

@@ -172,6 +172,7 @@ def show_category(request, category_name_slug):
 #
 @login_required
 def add_project(request):
+    context_dict = {}
     if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
@@ -184,8 +185,7 @@ def add_project(request):
             print(form.errors)
     else:
         form = ProjectForm()
-        categories = Category.objects.all()
-        context_dict = {'form': form, 'categories': categories}
+        context_dict = {'form': form}
 
     return render(request, 'GitQuid/add_project.html', context_dict)
 

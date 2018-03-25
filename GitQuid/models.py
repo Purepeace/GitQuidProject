@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
+from markdownx.models import MarkdownxField
 
 
 # Django creates primary key automatically if not specified btw
@@ -44,11 +45,13 @@ class Project(models.Model):
     # null=True shouldn't be here. Something is broken with user detection in add_project view
     # userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    name = models.CharField(max_length=200)
+    maxLen = 200
+    name = models.CharField(max_length=maxLen)
     date = models.DateTimeField(default=timezone.now())
-    description = models.CharField(max_length=300, null=True)
-    title_image = models.ImageField(upload_to="title_images", null=True, blank=True)
-    body = models.TextField(null=True, blank=True)
+    description = models.CharField(max_length=maxLen, blank=True, default='')
+    title_image = models.ImageField(upload_to="title_images", blank=True, null=True)
+    body = MarkdownxField(blank=True, default='')
+    published = models.BooleanField(default=False)
     # change
     goal = models.FloatField(default=-69)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
@@ -65,7 +68,7 @@ class Donation(models.Model):
     amount = models.FloatField()
     date = models.DateTimeField(default=timezone.now())
     comMaxLen = 200
-    comment = models.CharField(max_length=comMaxLen, null=True)
+    comment = models.CharField(max_length=comMaxLen, blank=True, default='')
 
     def __str__(self):
         return str(self.amount) + ' to ' + str(self.project) + ' at ' + str(self.date)[:16]

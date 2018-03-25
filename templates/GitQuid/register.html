@@ -6,8 +6,9 @@
 {% endblock %}
 
 {% block body_block %}
-<div align="center">
-    <h1>Register for GitQuid</h1>
+    {#align= is no longer supported in HTML 5. Use css instead#}
+    <div>
+        <h1>Register for GitQuid</h1>
         <form id="user_form" method="post" action="{% url 'GitQuid:register' %}"
               enctype="multipart/form-data">
 
@@ -20,5 +21,5 @@
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" name="submit" value="REGISTER" id="position9"/>
         </form>
-</div>
+    </div>
 {% endblock %}
