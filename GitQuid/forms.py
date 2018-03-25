@@ -3,6 +3,7 @@ from django.contrib.auth.models import *
 from GitQuid.models import UserProfile, Category, Project
 
 
+
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128,
                            help_text="Please enter the category name.")
@@ -48,7 +49,15 @@ class UserProfileForm(forms.ModelForm):
 
 
 class ProjectForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ProjectForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label = "What's the title of your project"
+        self.fields['category'].label = "Set your project's category"
+        self.fields['title_image'].label = "Select an image for your project"
+        self.fields['body'].label = "Describe your project"
+        self.fields['donations'].label = "Set the money goal for your project"
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
-        fields = ('name', 'category', 'title_image', 'body')
+        fields = ('name', 'category', 'title_image', 'body', 'donations')
