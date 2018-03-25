@@ -1,5 +1,9 @@
 body {
-    background-color: #F5EDD4
+  font-family: 'Lora';
+  background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url("niharika_art.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 
 .boxed {
@@ -11,27 +15,13 @@ body {
 
 }
 
-#logo {
-    position: absolute;
-    top: 1px;
-    left: 10px;
-    width: 150px;
-    height: auto;
-}
-
-#title {
-    position: absolute;
-    top: 140px;
-    left: 27px;
-    font-size: 30px;
-    font-family: Courier New;
-
-}
 
 #login_form {
     position: fixed;
     top: 40px;
     right: 40px;
+    font-family: CenturyGothic;
+    color: #cccccc;
 
 }
 
@@ -51,42 +41,15 @@ body {
     border-radius: 4px;
 }
 
-input[type=submit] {
-    /*width: 70px;*/
-    /*position: absolute;*/
-    /*left: 191px;*/
-    /*top: 95px;*/
-    background: #09c;
-    color: #fff;
-    font-family: tahoma, geneva, algerian;
-    height: 30px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    border: 1px solid #999;
-}
-
-#position {
-    position: fixed;
-    top: 25px;
-    right: 210px;
-    font-family: Courier New;
-
-}
-
-#position2 {
-    position: fixed;
-    top: 85px;
-    right: 210px;
-    font-family: Courier New;
-
-}
-
 #signin{
     position: fixed;
     top: 140px;
     right: 180px;
-    font-family: Courier New;
+    font-family: CenturyGothic;
+}
+
+li{
+    display: inline;
 }
 
 #signup {
