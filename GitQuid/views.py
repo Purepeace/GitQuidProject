@@ -16,6 +16,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.shortcuts import get_object_or_404
 
 
 # from django import template
@@ -60,9 +61,22 @@ def account(request):
     return response
 
 
-def projectPage(request):
-    response = render(request, 'GitQuid/projectPage.html')
-    return response
+def projectPage(request, slug):
+    context_dic = {'project': None, 'donations': None, 'author': False, 'leftToGoal': 0.0, 'percentCollected': 0.0}
+    try:
+        project = get_object_or_404(Project, slug=slug)
+        context_dic['project'] = project
+        context_dic['leftToGoal'] = max(0, project.goal - project.donations)
+        context_dic['percentCollected'] = round(project.donations/project.goal*100, 2)
+        # not implemented yet
+        context_dic['donations'] = Donation.objects.filter(project=project)
+        if request.user.is_authenticated and request.user == project.user:
+            context_dic['author'] = True
+
+    except Project.DoesNotExist:
+        print("Project does not exist")
+        # return redirect('index')
+    return render(request, 'GitQuid/projectPage.html', context_dic)
 
 
 #
@@ -171,7 +185,7 @@ def show_category(request, category_name_slug):
 #
 #
 @login_required
-def add_project(request):
+def addProject(request):
     context_dict = {}
     if request.method == "POST":
         form = ProjectForm(request.POST)
@@ -187,7 +201,7 @@ def add_project(request):
         form = ProjectForm()
         context_dict = {'form': form}
 
-    return render(request, 'GitQuid/add_project.html', context_dict)
+    return render(request, 'GitQuid/addProject.html', context_dict)
 
 
 #
@@ -201,7 +215,7 @@ def add_project(request):
 #
 #
 # @register.simple_tag(takes_context=True)
-def browse_projects(request):
+def browseProjects(request):
     projects = Project.objects.all()
     donations = Donation.objects.all()
 

@@ -13,6 +13,48 @@ from django.contrib.auth.hashers import make_password
 import datetime
 
 
+loremWithMarkdown = """# Daulida bis non grave fecerit margine Diomede
+
+## Gramineo mortale praestantes sinus Delon altior ponitque
+
+Lorem markdownum naufraga o vitae meo mutatus cuspide sine breviter quisque
+confisa repugnat aethere; qui mearum nefas: alis. Glaebaque Naxon non Parosque
+utve, quam [manu imbres](http://pietas-dea.io/loranymphae.php) pudor, Asopidos,
+a. Plangore cuspidis cogis boum id *nihil succedit*, aetas pulmonis labores
+aestu adsumere adpositis! Radice toto torum, pontus alii, nec pars ferus,
+iuvenem prohibete modo oculis dare iuventae latet.
+
+1. Cum hinc stipite locuta
+2. Fulmen desierant sacro tale o venit comitavit
+3. Loqui viridesque madefacta plenis
+4. Ceu ab Alcidamas victa nemorum recanduit quae
+
+Capax desertum si **tellus concretam** posses thalamoque, ipse qua. In adiectura
+sanguis Argus Phrygum Athon. Auctor lassaque collesque partem, tot vix asper
+maduere inaniter, vestem usu defluxere quae nec nomen? Urbe ultima de requiret
+suo fores vertisse frutices inplet capillos capillos.
+
+## Nurusque finis
+
+In enim, qua materna silva longa huius fauces, captam ad, in. Cum non frontis
+idonea tristes inpresso moras. Hastam et simul armatus!
+
+Petis quot; *tamen invergens* ingentique, aera repandus quales: nomen omnibus.
+Balatum et lacrimosa pereunt haec, Sol, ne vestri creatos Aethalion hunc tenuere
+arbitrio Aonios transformia. Oleis hastamque Aegaeas inde; lac res sanguine
+adhuc reperire. Est dixit dolores, at animam antro pectora crescente cadunt!
+
+> Aeolon in positaeque Thessalidum nodoso freta. Pomaria alta matris ad extimuit
+> addit!
+
+Adsuerant daedalus insilit belua creatam saltus ut vultus, me fuit suarum priori
+[vaga negare](http://iuvencumpraecepta.io/) est artem toto est. Matutina
+plurimus arte habitabilis suae pectora septem saeva commota, sibi.
+
+Radiis repagula ramis est: et sertaque, postque silices fuit tibi
+[non](http://nisi-proavitaque.io/dedit-pictasque)! Exactum mundi quae borean,
+pictis Oceani fictamque, non alto sua et herbis, nostra ni potestas."""
+
 # Db setup:
 # 0. if models were changed wipe db deleting all migrations from GitQuid/migrations (do NOT delete __init__.py) and
 # deleting db file (flush is not enough)
@@ -68,7 +110,7 @@ def populate():
     c15.save()
 
     # User creates a project
-    p = Project(user=u, name="Awesome project", body="Lorem Ipsum of the awesome project",
+    p = Project(user=u, name="Awesome project", body=loremWithMarkdown,
                 category=c, date=datetime.datetime(2015, 12, 1, 23, 59))
     p.save()
 

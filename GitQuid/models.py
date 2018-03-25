@@ -3,7 +3,8 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 from markdownx.models import MarkdownxField
-
+from markdownx.utils import markdownify
+import itertools
 
 # Django creates primary key automatically if not specified btw
 # on_delete=models.PROTECT - Django 2.0 requires that
@@ -47,6 +48,7 @@ class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     maxLen = 200
     name = models.CharField(max_length=maxLen)
+    slug = models.SlugField(max_length=(maxLen+50), unique=True, null=True)
     date = models.DateTimeField(default=timezone.now())
     description = models.CharField(max_length=maxLen, blank=True, default='')
     title_image = models.ImageField(upload_to="title_images", blank=True, null=True)
@@ -57,6 +59,21 @@ class Project(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # for internal use only. Sum of all donations to this project
     donations = models.FloatField(default=0, blank=True)
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.body)
+    # ensures unique slug. Buggy then saving the same object multiple times
+    def save(self, *args, **kwargs):
+        self.slug = slugify(''.join((self.name, str(self.id))))
+        # s = ''
+        # count = ''
+        # for i in itertools.count(0, -1):
+        #     s = slugify(''.join((self.name, str(count))))
+        #     if not Project.objects.filter(slug=s):
+        #         break
+        #     count = i
+        # self.slug = s
+        super(Project, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name

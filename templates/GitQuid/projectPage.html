@@ -1,18 +1,55 @@
-{% extends 'GitQuid/base.html' %}
-{% load staticfiles %}
+{#{% extends 'GitQuid/base.html' %}#}
 
 {% block title_block %}
+    {{ project.name }}
 {% endblock %}
 
-
 {% block body_block %}
-    <div align=center>
-        YOUR DETAILS: <br/>
-        {{ project.name }}<br/>
-        {% if user.userprofile.picture.url != null %}
-            <img src="{{ project.title_image.url }}" alt="project picture" width="100px"/><br/>
+    {% if project.published or author %}
+        {# load static files later to avoid spoilers#}
+        {% load staticfiles %}
+
+        {% if not project.published %}
+            <div>
+                <srong>S u p</srong>
+                , {{ project.user }}. Project is still not available to the public. Take your time.
+            </div>
+        {% elif project.published and author %}
+            <div>
+                <srong>H e y</srong>
+                , {{ project.user }}. Project is up and running. Good luck!
+            </div>
         {% endif %}
-        {{ project.donations }}<br/>
-        DESCRIPTION: {{ project.description }}<br/>
-    </div>
+        <h2>{{ project.name }}</h2>
+        <h4><i>Author's profile:</i>
+            {# needs users slugs to work           <a href="{% url 'GitQuid:account' project.user %}">{{ project.user }}</a>#}
+        </h4>
+
+        <div id="projectBody">
+            {# Sauce: https://stackoverflow.com/questions/42416123/i-cant-understand-the-django-markdownxs-usage#}
+            {{ project.formatted_markdown|safe }}
+        </div>
+
+        <br>
+        <div id="collected">
+            Collected:{{ project.donations }}£ ({{ percentCollected }}%)
+        </div>
+        <div id="leftToGoal">
+            Only {{ leftToGoal }}£ to go!
+        </div>
+        <div id="goal">
+            Aiming for: {{ project.goal }}£ in total
+        </div>
+
+        <button type="submit">DONATE!(not working yet)</button>
+
+
+
+    {% else %}
+
+        <div>
+            Project is here but it's not published yet.
+        </div>
+
+    {% endif %}
 {% endblock %}

@@ -18,8 +18,7 @@ urlpatterns = [
     url(r'^account/$', views.account, name='account'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^register/$', views.register, name='register'),
-    url(r'^projects/$', views.browse_projects, name='browseProjects'),
-    url(r'^addProject/$', views.add_project, name='addProject'),
-    url(r'^projectPage/$', views.projectPage, name='projectPage'),
-
+    url(r'^projects/$', views.browseProjects, name='browseProjects'),
+    url(r'^addProject/$', views.addProject, name='addProject'),
+    url(r'^projectPage/(?P<slug>[-\w]+)/$', views.projectPage, name='projectPage'),
 ]

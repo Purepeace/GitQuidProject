@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from django.urls import reverse
+from datetime import datetime
 import django
 
 
@@ -22,6 +23,8 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+
+
 
 AUTH_PROFILE_MODULE = 'GitQuid.UserProfile'
 
@@ -40,6 +43,8 @@ ALLOWED_HOSTS = ['quidgit.pythonanywhere.com', '127.0.0.1']
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
+MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
+
 
 # Application definition
 
@@ -50,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
     'GitQuid',
     # 3rd party apps:
     'markdownx',
@@ -68,10 +74,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'GitQuidProject.urls'
 
+markdownRenderer = os.path.join(django.__path__[0], 'form', 'templates')
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],
+        'DIRS': [TEMPLATE_DIR,
+                 markdownRenderer],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
