@@ -1,48 +1,57 @@
 <!DOCTYPE html>
-{% load staticfiles %}
-<script src="{% static 'Libraries/jquery/jquery.js' %}"></script>
-<script src="{% static 'js/gitquid-jquery.js' %}"></script>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% load staticfiles %}
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/index.css" rel="stylesheet">
+
+
+    <script src="{% static 'Libraries/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/gitquid-jquery.js' %}"></script>
     <title>
         {% block title_block %}
         {% endblock %}
     </title>
 </head>
-<body>
+<body style="background-color:#DDDDDD;" >
 
 <header>
-    <a href="/GitQuid/">
-        <img id="logo" src="{% static 'images/logo.png' %}" alt="GitQuid Logo"/>
-
-        <div id="title">GitQuid</div>
-    </a>
-    <form action="{% url 'GitQuid:browse_projects' %}">
-        <input type="submit" value="BROWSE PROJECTS" id="position7">
-    </form>
 
     {% block login_block %}
 
         {% if user.is_authenticated %}
             <div align="center">Hi, {{ user.username }}!</div>
-            <form action="{% url 'GitQuid:logout' %}">
-                <input type="submit" value="LOGOUT" id="position8">
-            </form>
-            <form action="{% url 'GitQuid:account' %}">
+             <li><form action="{% url 'GitQuid:logout' %}">
+               <input type="submit" value="LOGOUT" id="position8">
+             </form></li>
+            <li><form action="{% url 'GitQuid:account' %}">
                 <input type="submit" value="MY ACCOUNT" id="position6">
-            </form>
+            </form></li>
 
-            <form action="{% url 'GitQuid:add_project' %}">
+            <li><form action="{% url 'GitQuid:add_project' %}">
                 <input type="submit" value="ADD PROJECT" id="position5">
-            </form>
+            </form></li>
         {% else %}
-            <div>
-                <form action="{% url 'GitQuid:register' %}">
+            <li>
+                <li><form action="{% url 'GitQuid:register' %}">
                     <input id="signup" type="submit" value="SIGN UP">
-                </form>
+            </form></li>
 
-                <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
+               <li> <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
                     {% csrf_token %}
                     <div id="position">Username</div>
                     <input type="text" name="username" value="" size="50" class="tab"/> <br/>
@@ -51,8 +60,9 @@
                     <input type="password" name="password" value="" size="50" class="tab"/> <br/>
                     <input id="signin" type="submit" value="Sign In"/>
 
-                </form>
+                </form></li>
             </div>
+            </ul>
 
         {% endif %}
     {% endblock %}
@@ -63,7 +73,7 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 
 </body>
 </html>
