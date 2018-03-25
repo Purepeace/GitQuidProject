@@ -56,8 +56,8 @@ class ProjectForm(forms.ModelForm):
         self.fields['category'].label = "Set your project's category"
         self.fields['title_image'].label = "Select an image for your project"
         self.fields['body'].label = "Describe your project"
-        self.fields['donations'].label = "Set the money goal for your project"
+        self.fields['goal'].label = "Set the money goal for your project"
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
-        fields = ('name', 'category', 'title_image', 'body', 'donations')
+        fields = ('name', 'category', 'title_image', 'body', 'goal')

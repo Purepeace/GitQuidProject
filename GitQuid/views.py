@@ -172,11 +172,15 @@ def show_category(request, category_name_slug):
 #
 
 def add_project(request):
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('register'))
+
     if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
             p = form.save(commit=False)
-            p.UserProfile = request.user
+            p.user_id = request.user.id
             p.published_date = timezone.now()
             p.save()
             return redirect('/GitQuid/projects/')

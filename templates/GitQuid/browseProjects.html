@@ -67,16 +67,16 @@
         {% for project in projects %}
             <li>
                 <h3>{{ project }}</h3>
-{#                <div class="boxed">#}
-                    {{ project.body }}
-                    <small>{{ project.date }}</small>
-                    £{{ project.donations }}
-                    Category: {{ project.category }}
-{#                </div>#}
+                {#                <div class="boxed">#}
+                {{ project.body }}
+                <small>{{ project.date }}</small>
+                £{{ project.donations }}
+                Category: {{ project.category }}
+                {#                </div>#}
             </li>
         {% endfor %}
 
-{#    {{ form.color }}#}
+        {#    {{ form.color }}#}
     </div>
     {#        <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
     {#            <button class="btn btn-primary" id="about-btn">#}

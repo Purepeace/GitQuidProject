@@ -6,13 +6,13 @@
 
 
 {% block body_block %}
-<div align=center>
-YOUR DETAILS: <br/>
- {{ project.name }}<br/>
-    {% if user.userprofile.picture.url != null %}
-    <img src="{{ project.title_image.url }}" alt="project picture" width="100px"/><br/>
-    {% endif %}
- {{ project.donations }}<br/>
-    DESCRIPTION: {{ project.description }}<br/>
-</div>
+    <div align=center>
+        YOUR DETAILS: <br/>
+        {{ project.name }}<br/>
+        {% if user.userprofile.picture.url != null %}
+            <img src="{{ project.title_image.url }}" alt="project picture" width="100px"/><br/>
+        {% endif %}
+        {{ project.donations }}<br/>
+        DESCRIPTION: {{ project.description }}<br/>
+    </div>
 {% endblock %}
