@@ -71,13 +71,10 @@ class ProjectForm(forms.ModelForm):
     #     self.fields['body'].label = "Describe your project"
     #     self.fields['goal'].label = "Set the money goal for your project"
 
-
-
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
         fields = ('name', 'description', 'title_image', 'category', 'body', 'goal')
-
 
     def clean(self):
         cleaned_data = super(ProjectForm, self).clean()
@@ -89,32 +86,23 @@ class ProjectForm(forms.ModelForm):
             )
 
 
-class EditProfileForm(UserChangeForm):
-
+class EditProfileForm(forms.ModelForm):
     class Meta:
-
         model = User
 
-        fields = {
+        fields = (
             'email',
-            'password',
 
-        }
+        )
 
 
-class EditRestForm(UserChangeForm):
 
+class EditRestForm(forms.ModelForm):
     class Meta:
-
         model = UserProfile
 
-        fields = {
+        fields = (
 
             'picture',
             'description',
-            'password',
-
-        }
-
-
-
+        )
