@@ -9,7 +9,7 @@ from GitQuid.models import Category
 from GitQuid.forms import CategoryForm
 # from GitQuid.forms import ProjectForm
 
-from GitQuid.forms import UserForm, UserProfileForm, ProjectForm
+from GitQuid.forms import UserForm, UserProfileForm, ProjectForm, EditProfileForm, EditRestForm
 from GitQuid.models import *
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
@@ -17,6 +17,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.forms import UserChangeForm
 
 
 # from django import template
@@ -306,3 +307,20 @@ def user_logout(request):
 #
 #
 #
+
+
+def editProfile(request):
+    if request.method == 'POST':
+
+        form = EditProfileForm(request.POST, instance=request.user)
+        otherform = EditRestForm(request.POST, instance=request.user)
+
+        if form.is_valid() and otherform.is_valid():
+            form.save()
+            return redirect('/GitQuid/account')
+
+    else:
+        form = EditProfileForm(instance=request.user)
+        otherform = EditRestForm(instance=request.user)
+        context_dict = {'form': form, 'otherform':otherform}
+        return render(request, 'GitQuid/edit.html', context_dict)

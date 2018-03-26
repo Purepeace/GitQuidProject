@@ -7,19 +7,24 @@
 
 {% block body_block %}
     {#align= is no longer supported in HTML 5. Use css instead#}
-    <div>
-        <h1>Register for GitQuid</h1>
-        <form id="user_form" method="post" action="{% url 'GitQuid:register' %}"
-              enctype="multipart/form-data">
+    <div class="container">
+        <div class="col-md-6">
+            <div id="logbox">
+                <h1>Register for GitQuid</h1>
+                <form id="user_form" method="post" action="{% url 'GitQuid:register' %}"
+                    enctype="multipart/form-data">
 
-            {% csrf_token %}
+                {% csrf_token %}
 
-            <!-- Display each form -->
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
+                <!-- Display each form -->
+                {{ user_form.as_p }}
+                {{ profile_form.as_p }}
 
-            <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="REGISTER" id="position9"/>
-        </form>
+                <!-- Provide a button to click to submit the form. -->
+                <input type="submit" name="submit" value="REGISTER" id="position9"/>
+                </form>
+            </div>
+        </div>
     </div>
+
 {% endblock %}

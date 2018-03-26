@@ -8,17 +8,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>GitQuid- Lightyears Ahead</title>
+    <title>GitQuid - Lightyears Ahead</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
+      <link href="css/min.main.css" rel="stylesheet">
 
   </head>
 
@@ -32,31 +36,33 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Start Bootstrap</a>
+        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Help Your Community</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+            <li class="nav-item active px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:index' %}">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="about.html">About</a>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:about' %}">About</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="products.html">Projects</a>
+
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' %}">Projects</a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="store.html">Categories</a>
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up Here</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
+    
     <section class="page-section about-heading">
       <div class="container">
         <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="images/about.jpg" alt="">
@@ -65,8 +71,8 @@
             <div class="col-xl-9 col-lg-10 mx-auto">
               <div class="bg-faded rounded p-5">
                 <h2 class="section-heading mb-4">
-                  <span class="section-heading-upper">Strong Coffee, Strong Roots</span>
-                  <span class="section-heading-lower">About Us.</span>
+                  <span class="section-heading-upper">Humble Beginnings. Big Dreams</span>
+                  <span class="section-heading-lower">About Us</span>
                 </h2>
                 <p>The world's a hard place. It's good to lend a helping hand every now and then. Want to help out? Need help? Well we'll give you a voice.</p>
                 <p class="mb-0">This platform is devoted to ensuring that budding entrepreneurs always have a rock to build their dreams on, and giving philanthropists a way to help out whenever they can.  </p>
@@ -82,10 +88,6 @@
         <p class="m-0 small">This website was made by Lab 6 Group C</p>
       </div>
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
 

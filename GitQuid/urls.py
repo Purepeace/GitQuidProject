@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^browseProjects/$', views.browseProjects, name='browseProjects'),
     url(r'^addProject/$', views.addProject, name='addProject'),
     url(r'^projectPage/(?P<slug>[-\w]+)/$', views.projectPage, name='projectPage'),
+    url(r'^account/edit/$', views.editProfile, name='editProfile'),
 ]
