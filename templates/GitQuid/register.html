@@ -1,30 +1,76 @@
 {% extends 'GitQuid/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
+
+ <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+     {% block title_block %}
     Register
 {% endblock %}
 
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+
+  </head>
 {% block body_block %}
     {#align= is no longer supported in HTML 5. Use css instead#}
-    <div class="container">
-        <div class="col-md-6">
-            <div id="logbox">
+    <div style="color: #c6c8ca" align="center">
                 <h1>Register for GitQuid</h1>
-                <form id="user_form" method="post" action="{% url 'GitQuid:register' %}"
+                <form  id="user_form" method="post" action="{% url 'GitQuid:register' %}"
                     enctype="multipart/form-data">
 
                 {% csrf_token %}
 
                 <!-- Display each form -->
-                {{ user_form.as_p }}
-                {{ profile_form.as_p }}
+                <span>{{ user_form.as_p }}</span>
+                <span>{{ profile_form.as_p }}</span>
 
                 <!-- Provide a button to click to submit the form. -->
-                <input type="submit" name="submit" value="REGISTER" id="position9"/>
+                <span><input type="submit" name="submit" value="REGISTER" id="position9"/></span>
                 </form>
             </div>
+    <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Help Your Community</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:index' %}">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:about' %}">About</a>
+            </li>
+            <li class="nav-item px-lg-4">
+
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' %}">Projects</a>
+            </li>
+            <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up Here</a>
+            </li>
+          </ul>
         </div>
-    </div>
+      </div>
+    </nav>
+
 
 {% endblock %}

@@ -34,6 +34,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    slug = models.SlugField(unique=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.user.username
@@ -62,9 +67,10 @@ class Project(models.Model):
     @property
     def formatted_markdown(self):
         return markdownify(self.body)
-    # ensures unique slug. Buggy then saving the same object multiple times
+    # ensures unique slug.
     def save(self, *args, **kwargs):
-        self.slug = slugify(''.join((self.name, str(self.id))))
+        self.slug = slugify(''.join((self.name, "-", str(self.id))))
+        #  Buggy then saving the same object multiple times
         # s = ''
         # count = ''
         # for i in itertools.count(0, -1):

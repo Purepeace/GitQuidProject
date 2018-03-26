@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'GitQuid/base.html' %}
+{% load staticfiles %}
 
   <head>
 
@@ -22,11 +22,11 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-      <link href="css/min.main.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 
   </head>
 
-  <body>
+  {% block body_block %}
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
       <span class="site-heading-upper text-primary mb-3">Lightyears Ahead</span>
@@ -89,6 +89,6 @@
       </div>
     </footer>
 
-  </body>
+  {% endblock %}
 
 </html>
