@@ -36,8 +36,9 @@ class UserProfile(models.Model):
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True, null=True)
 
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.user.username)
+        self.slug = slugify(''.join([str(self.user.username), '-', str(len(UserProfile.objects.all()))]))
         super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -64,12 +65,13 @@ class Project(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # for internal use only. Sum of all donations to this project
     donations = models.FloatField(default=0, blank=True)
+
     @property
     def formatted_markdown(self):
         return markdownify(self.body)
     # ensures unique slug.
     def save(self, *args, **kwargs):
-        self.slug = slugify(''.join((self.name, "-", str(self.id))))
+        self.slug = slugify(''.join([self.name, "-", str(len(Project.objects.all()))]))
         #  Buggy then saving the same object multiple times
         # s = ''
         # count = ''
