@@ -1,9 +1,31 @@
+"""
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+ALL SLUGS AND NO CSS MADE POV A DULL BOY
+"""
+
+
+
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
+from django.urls import reverse
 import itertools
 
 # Django creates primary key automatically if not specified btw
@@ -36,7 +58,7 @@ class UserProfile(models.Model):
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True, null=True)
 
-
+    # ensures unique slug. Doesn't us pk because pk can be none sometimes
     def save(self, *args, **kwargs):
         self.slug = slugify(''.join([str(self.user.username), '-', str(len(UserProfile.objects.all()))]))
         super(UserProfile, self).save(*args, **kwargs)
@@ -69,7 +91,7 @@ class Project(models.Model):
     @property
     def formatted_markdown(self):
         return markdownify(self.body)
-    # ensures unique slug.
+    # ensures unique slug. Doesn't us pk because pk can be none sometimes
     def save(self, *args, **kwargs):
         self.slug = slugify(''.join([self.name, "-", str(len(Project.objects.all()))]))
         #  Buggy then saving the same object multiple times

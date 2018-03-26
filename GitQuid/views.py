@@ -57,9 +57,13 @@ def index(request):
     return response
 
 
-def account(request):
-    response = render(request, 'GitQuid/account.html')
+def account(request, slug):
+    context_dic = {'accUser': None, 'curUser': request.user}
+    au = get_object_or_404(UserProfile, slug=slug)
+    context_dic['accUser'] = au.user
+    response = render(request, 'GitQuid/account.html', context_dic)
     return response
+
 
 def about(request):
     response = render(request, 'GitQuid/about.html')
@@ -72,7 +76,7 @@ def projectPage(request, slug):
         project = get_object_or_404(Project, slug=slug)
         context_dic['project'] = project
         context_dic['leftToGoal'] = max(0, project.goal - project.donations)
-        context_dic['percentCollected'] = round(project.donations/project.goal*100, 2)
+        context_dic['percentCollected'] = round(project.donations / project.goal * 100, 2)
         # not implemented yet
         context_dic['donations'] = Donation.objects.filter(project=project)
         if request.user.is_authenticated and request.user == project.user:
@@ -258,7 +262,6 @@ def register(request):
             user.set_password(user.password)
             user.save()
 
-
             profile = profile_form.save(commit=False)
             profile.user = user
 
@@ -306,13 +309,14 @@ def user_logout(request):
     logout(request)
     # Take the user back to the homeproject.
     return HttpResponseRedirect(reverse('index'))
+
+
 #
 #
 #
 
-
-def editProfile(request):
-
+@login_required()
+def editProfile(request, slug):
     if request.method == 'POST':
 
         form = EditProfileForm(data=request.POST, instance=request.user)
@@ -321,7 +325,8 @@ def editProfile(request):
         if form.is_valid() and otherform.is_valid():
             form.save()
             otherform.save()
-            return redirect('/GitQuid/account')
+            return HttpResponseRedirect(
+                reverse('GitQuid:account', kwargs={'slug': request.user.userprofile.slug}))
 
     else:
         form = EditProfileForm(instance=request.user)

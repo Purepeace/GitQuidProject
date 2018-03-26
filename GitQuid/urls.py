@@ -15,11 +15,11 @@ urlpatterns = [
     # url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
     #                views.show_category, name='show_category'),
     # url(r'^category/(?P<category_name_slug>[\w\-]+)/add_project/', views.add_project, name='add_project'),
-    url(r'^account/$', views.account, name='account'),
+    url(r'^account/(?P<slug>[-\w]+)/$', views.account, name='account'),
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^register/$', views.register, name='register'),
     url(r'^browseProjects/$', views.browseProjects, name='browseProjects'),
     url(r'^addProject/$', views.addProject, name='addProject'),
     url(r'^projectPage/(?P<slug>[-\w]+)/$', views.projectPage, name='projectPage'),
-    url(r'^account/editProfile/$', views.editProfile, name='editProfile'),
+    url(r'^account/(?P<slug>[-\w]+)/editProfile/$', views.editProfile, name='editProfile'),
 ]
