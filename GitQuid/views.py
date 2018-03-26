@@ -193,11 +193,14 @@ def show_category(request, category_name_slug):
 def addProject(request):
     context_dict = {}
     if request.method == "POST":
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             p = form.save(commit=False)
             p.user_id = request.user.id
             p.published_date = timezone.now()
+            if 'title_image' in request.FILES:
+                p.title_image = request.FILES['title_image']
+
             p.save()
             return redirect('/GitQuid/browseProjects/')
         else:
@@ -232,7 +235,6 @@ def browseProjects(request):
         # Update Project model with sum of donations
         p = Project.objects.get(id=project.id)
         p.donations = donation_sum
-        p.save()
 
     # Get parameter by which projects are going to be sorted
     sort = request.GET.get('sort', 'name')
@@ -310,17 +312,19 @@ def user_logout(request):
 
 
 def editProfile(request):
+
     if request.method == 'POST':
 
-        form = EditProfileForm(request.POST, instance=request.user)
-        otherform = EditRestForm(request.POST, instance=request.user)
+        form = EditProfileForm(data=request.POST, instance=request.user)
+        otherform = EditRestForm(data=request.POST, instance=request.user.userprofile)
 
         if form.is_valid() and otherform.is_valid():
             form.save()
+            otherform.save()
             return redirect('/GitQuid/account')
 
     else:
         form = EditProfileForm(instance=request.user)
-        otherform = EditRestForm(instance=request.user)
-        context_dict = {'form': form, 'otherform':otherform}
-        return render(request, 'GitQuid/edit.html', context_dict)
+        otherform = EditRestForm(instance=request.user.userprofile)
+        context_dict = {'form': form, 'otherform': otherform}
+        return render(request, 'GitQuid/editProfile.html', context_dict)
