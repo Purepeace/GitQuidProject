@@ -79,7 +79,7 @@ class Project(models.Model):
     slug = models.SlugField(max_length=(maxLen+50), unique=True, null=True)
     date = models.DateTimeField(default=timezone.now())
     description = models.CharField(max_length=maxLen, blank=True, default='')
-    title_image = models.ImageField(upload_to='title_images', blank=True, null=True)
+    title_image = models.ImageField(upload_to='title_images', blank=True)
     body = MarkdownxField(blank=True, default='')
     published = models.BooleanField(default=False)
     # change

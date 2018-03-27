@@ -63,32 +63,12 @@ class ProjectForm(forms.ModelForm):
                                   'placeholder': "Supports markdown! Also it autosaves! (if us lazy cunts will implement ajax lol)(also, succ a ducc, kickstarter)"}))
     goal = forms.FloatField(label="How much Quid do you wanna Git?")
 
-    # def __init__(self, *args, **kwargs):
-    #     super(ProjectForm, self).__init__(*args, **kwargs)
-    #     self.fields['name'].label = "What's the title of your project"
-    #     self.fields['category'].label = "Set your project's category"
-    #     self.fields['title_image'].label = "Select an image for your project"
-    #     self.fields['body'].label = "Describe your project"
-    #     self.fields['goal'].label = "Set the money goal for your project"
 
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
         fields = ('name', 'description', 'title_image', 'category', 'body', 'goal')
-        widgets = {
 
-            'title_image': forms.FileInput(attrs={'class': 'custom-file', 'id': "custom-file"}),
-
-        }
-
-    def clean(self):
-        cleaned_data = super(ProjectForm, self).clean()
-        # Validates if category actually exists. Needed cuz post could be tampered with.
-        cat = cleaned_data.get('category')
-        if not Category.objects.filter(name=cat):
-            raise forms.ValidationError(
-                "No such category exists, you cheeky hacker"
-            )
 
 
 class EditProfileForm(forms.ModelForm):
