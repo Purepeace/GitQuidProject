@@ -55,20 +55,18 @@ class ProjectForm(forms.ModelForm):
     description = forms.CharField(label="Short description:", max_length=Project.maxLen, required=False,
                                   widget=forms.TextInput(attrs={
                                       'placeholder': "This will be displayed on browsing page. Think how you would attract potential donations"}))
-    #title_image = forms.ImageField(label="Title image:", required=False)
-    # don't know how to replicate widget like default one. NEEDS FIXING, KEY FEATURE, CAN'T HAVE WEBSITE WITHOUT IT
+    title_image = forms.ImageField(label="Title image:", required=False)
     # category = forms.CheckboxSelectMultiple(label="Category*:")
+
     body = MarkdownxFormField(label="Long description:", required=False,
                               widget=forms.TextInput(attrs={
                                   'placeholder': "Supports markdown! Also it autosaves! (if us lazy cunts will implement ajax lol)(also, succ a ducc, kickstarter)"}))
     goal = forms.FloatField(label="How much Quid do you wanna Git?")
 
-
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
         fields = ('name', 'description', 'title_image', 'category', 'body', 'goal')
-
 
 
 class EditProfileForm(forms.ModelForm):
@@ -79,7 +77,6 @@ class EditProfileForm(forms.ModelForm):
             'email',
 
         )
-
 
 
 class EditRestForm(forms.ModelForm):

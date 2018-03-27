@@ -199,19 +199,11 @@ def show_category(request, category_name_slug):
 def addProject(request):
     context_dict = {}
     if request.method == "POST":
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             p = form.save(commit=False)
             p.user_id = request.user.id
             p.published_date = timezone.now()
-
-            for key, value in request.FILES.items():
-                print(key, value)
-
-            if 'title_image' in request.FILES:
-                p.title_image = request.FILES['title_image']
-                print("labas")
-
             p.save()
             return redirect('/GitQuid/browseProjects/')
         else:
