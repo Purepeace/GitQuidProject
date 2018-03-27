@@ -60,7 +60,8 @@ class Project(models.Model):
     name = models.CharField(max_length=maxLen)
     # __current_name = None
     slug = models.SlugField(max_length=(maxLen + 50), unique=True, null=True)
-    date = models.DateTimeField(default=timezone.now())
+    dateCreated = models.DateTimeField(default=timezone.now())
+    datePublished = models.DateTimeField(null=True)
     description = models.CharField(max_length=maxLen, blank=True, default='')
     title_image = models.ImageField(upload_to='title_images', blank=True, null=True)
     body = MarkdownxField(blank=True, default='')
@@ -79,7 +80,6 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         # if model was just created
         # Sauce: https://stackoverflow.com/questions/2307943/django-overriding-the-model-create-method
-        print(self.id)
         if self.id is None:
             # save to make sure that project has id
             super(Project, self).save(*args, **kwargs)
@@ -107,12 +107,3 @@ class Donation(models.Model):
         return str(self.amount) + ' to ' + str(self.project) + ' at ' + str(self.date)[:16]
 
 
-# Table to store whatever material was uploaded to the project (picture, vids, etc.)
-# Many-to-one relation with project
-class Media(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    tag = models.CharField(max_length=50)
-    media = models.BinaryField()
-
-    def __str__(self):
-        return self.tag

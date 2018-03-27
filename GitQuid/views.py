@@ -1,9 +1,3 @@
-# !!!
-# Commented everything because:
-# python manage.py sqlmigrate GitQuid 0001 can't run if some django code doesn't compile
-# Pov
-# !!!
-
 from django.shortcuts import render, redirect
 from GitQuid.models import Category
 from GitQuid.forms import CategoryForm
@@ -11,7 +5,7 @@ from GitQuid.forms import CategoryForm
 
 
 from django.http import JsonResponse
-from GitQuid.forms import UserForm, UserProfileForm, ProjectForm, EditProfileForm, EditRestForm
+from GitQuid.forms import *
 from GitQuid.models import *
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
@@ -59,35 +53,9 @@ def index(request):
     return response
 
 
-def account(request, slug):
-    context_dic = {'accUser': None, 'curUser': request.user}
-    au = get_object_or_404(UserProfile, slug=slug)
-    context_dic['accUser'] = au.user
-    response = render(request, 'GitQuid/account.html', context_dic)
-    return response
-
-
 def about(request):
     response = render(request, 'GitQuid/about.html')
     return response
-
-
-def projectPage(request, slug):
-    context_dic = {'project': None, 'donations': None, 'author': False, 'leftToGoal': 0.0, 'percentCollected': 0.0}
-    try:
-        project = get_object_or_404(Project, slug=slug)
-        context_dic['project'] = project
-        context_dic['leftToGoal'] = max(0, project.goal - project.donations)
-        context_dic['percentCollected'] = round(project.donations / project.goal * 100, 2)
-        # not implemented yet
-        context_dic['donations'] = Donation.objects.filter(project=project)
-        if request.user.is_authenticated and request.user == project.user:
-            context_dic['author'] = True
-
-    except Project.DoesNotExist:
-        print("Project does not exist")
-        # return redirect('index')
-    return render(request, 'GitQuid/projectPage.html', context_dic)
 
 
 #
@@ -195,33 +163,6 @@ def show_category(request, category_name_slug):
 #     return render(request, 'GitQuid/add_category.html', {'form': form})
 #
 #
-@login_required
-def addProject(request):
-    context_dict = {}
-    if request.method == "POST":
-        form = ProjectForm(request.POST, request.FILES)
-        if form.is_valid():
-            p = form.save(commit=False)
-            p.user_id = request.user.id
-            p.published_date = timezone.now()
-
-            for key, value in request.POST.items():
-                print(key, value)
-
-            if 'title_image' in request.FILES:
-                p.title_image = request.FILES['title_images']
-                print("labas")
-
-            p.save()
-            return redirect('/GitQuid/browseProjects/')
-        else:
-            print(form.errors)
-    else:
-        form = ProjectForm()
-        context_dict = {'form': form}
-
-    return render(request, 'GitQuid/addProject.html', context_dict)
-
 
 #
 #
@@ -255,6 +196,84 @@ def browseProjects(request):
     context_dict = {'projects': projects.order_by(sort)}
 
     return render(request, 'GitQuid/browseProjects.html', context_dict)
+
+
+@login_required()
+def addProject(request):
+    context_dic = {'form': None}
+    if request.method == "POST":
+        form = AddProjectForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.user_id = request.user.id
+            f.dateCreated = timezone.now()
+            f.save()
+            project = form.instance
+
+            # project = Project.objects.filter(id = project.id)
+            # proceed to full project editing page
+            return HttpResponseRedirect((reverse('GitQuid:editProject', kwargs={'slug': project.slug})))
+        else:
+            print(form.errors)
+    else:
+        form = AddProjectForm()
+        context_dic['form'] = form
+
+    return render(request, 'GitQuid/addProject.html', context_dic)
+
+
+@login_required()
+def editProject(request, slug):
+    context_dict = {'form': None}
+    # get currently editable project
+    project = get_object_or_404(Project, slug=slug)
+    # if user is the author of the project enable editing
+    if request.user == project.user:
+        if request.method == "POST":
+            form = ProjectForm(request.POST, request.FILES, instance=project)
+            if form.is_valid():
+                f = form.save(commit=False)
+                # f.user_id = request.user.id
+                # f.dateCreated = timezone.now()
+
+                for key, value in request.POST.items():
+                    print(key, value)
+
+                if 'title_image' in request.FILES:
+                    f.title_image = request.FILES['title_images']
+                    print("labas")
+
+                f.save()
+                # redirect to the same page
+                return HttpResponseRedirect(reverse('GitQuid:editProject', kwargs={'slug': slug}))
+            else:
+                print(form.errors)
+        else:
+            form = ProjectForm(instance=project)
+            context_dict['form'] = form
+    else:
+        # go to projects page
+        return HttpResponseRedirect(reverse('GitQuid:browseProjects'))
+
+    return render(request, 'GitQuid/editProject.html', context_dict)
+
+
+def viewProject(request, slug):
+    context_dic = {'project': None, 'donations': None, 'author': False, 'leftToGoal': 0.0, 'percentCollected': 0.0}
+    try:
+        project = get_object_or_404(Project, slug=slug)
+        context_dic['project'] = project
+        context_dic['leftToGoal'] = max(0, project.goal - project.donations)
+        context_dic['percentCollected'] = round(project.donations / project.goal * 100, 2)
+        # not implemented yet
+        context_dic['donations'] = Donation.objects.filter(project=project)
+        if request.user.is_authenticated and request.user == project.user:
+            context_dic['author'] = True
+
+    except Project.DoesNotExist:
+        print("Project does not exist")
+        # return redirect('index')
+    return render(request, 'GitQuid/viewProject.html', context_dic)
 
 
 def register(request):
@@ -304,13 +323,21 @@ def register(request):
                    'registered': registered})
 
 
+# renders user's account
+def account(request, slug):
+    context_dic = {'accUser': None, 'curUser': request.user}
+    au = get_object_or_404(UserProfile, slug=slug)
+    context_dic['accUser'] = au.user
+    return render(request, 'GitQuid/account.html', context_dic)
+
+
 #
 #
 #
 #
 # Use the login_required() decorator to ensure only those logged in can
 # access the view.
-@login_required
+@login_required()
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
@@ -326,7 +353,7 @@ def user_logout(request):
 def editProfile(request, slug):
     # if user who is not logged in is typing using url which would edit another user's profile
     if request.user.userprofile.slug != slug:
-        print("Redirecting to view account as this not belongs to you") # rip my london at this point aylamo
+        print("Redirecting to view account as this not belongs to you")  # rip my london at this point aylamo
         return HttpResponseRedirect(
             reverse('GitQuid:account', kwargs={'slug': request.user.userprofile.slug}))
 

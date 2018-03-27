@@ -159,5 +159,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
 
-LOGIN_URL = '/GitQuid/login/'
-#LOGIN_REDIRECT_URL = reverse('GitQuid:register')
+LOGIN_URL = 'GitQuid:register'

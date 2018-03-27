@@ -111,15 +111,15 @@ def populate():
 
     # User creates a project
     p = Project(user=u, name="Awesome project", body=loremWithMarkdown,
-                category=c, date=datetime.datetime(2015, 12, 1, 23, 59))
+                category=c,  dateCreated=datetime.datetime(2015, 12, 1, 23, 59))
     p.save()
 
     p2 = Project(user=u, name="Wonderful project", body="We need money",
-                 category=c2, date=datetime.datetime(2019, 12, 1, 23, 59))
+                 category=c2, dateCreated=datetime.datetime(2019, 12, 1, 23, 59))
     p2.save()
 
     p3 = Project(user=u, name="Decent project", body="Please donate",
-                 category=c3, date=datetime.datetime(2012, 12, 1, 23, 59))
+                 category=c3, dateCreated=datetime.datetime(2012, 12, 1, 23, 59))
     p3.save()
 
     # User ads some pictures to the project
