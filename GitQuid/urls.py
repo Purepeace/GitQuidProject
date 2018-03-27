@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^addProject/$', views.addProject, name='addProject'),
     url(r'^projectPage/(?P<slug>[-\w]+)/$', views.projectPage, name='projectPage'),
     url(r'^account/(?P<slug>[-\w]+)/editProfile/$', views.editProfile, name='editProfile'),
+    url(r'^ajax/validate_username/$', views.validate_username, name='validate_username'),
 ]

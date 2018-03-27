@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body_block %}
+<div style="color:#c6c8ca;text-align:center">
     {% if project.published or author %}
         {# load static files later to avoid spoilers#}
         {% load staticfiles %}
@@ -52,4 +53,6 @@
         </div>
 
     {% endif %}
+
+    </div>
 {% endblock %}

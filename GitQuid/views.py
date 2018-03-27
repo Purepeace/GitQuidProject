@@ -9,6 +9,8 @@ from GitQuid.models import Category
 from GitQuid.forms import CategoryForm
 # from GitQuid.forms import ProjectForm
 
+
+from django.http import JsonResponse
 from GitQuid.forms import UserForm, UserProfileForm, ProjectForm, EditProfileForm, EditRestForm
 from GitQuid.models import *
 from django.contrib.auth import authenticate, login
@@ -338,3 +340,11 @@ def editProfile(request, slug):
         otherform = EditRestForm(instance=request.user.userprofile)
         context_dict = {'form': form, 'otherform': otherform}
         return render(request, 'GitQuid/editProfile.html', context_dict)
+
+
+def validate_username(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    return JsonResponse(data)

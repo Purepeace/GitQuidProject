@@ -1,4 +1,4 @@
-{#{% extends 'GitQuid/base.html' %}#}
+{% extends 'GitQuid/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -7,7 +7,7 @@
 
 {% block body_block %}
 {#align= is no longer supported in HTML 5. Use css instead#}
-    <div>
+    <div style="color: #c6c8ca; text-align:center">
         ADD NEW PROJECT HERE
         <div></div>
         <form id="post_form" method="POST" class="post-form">{% csrf_token %}
