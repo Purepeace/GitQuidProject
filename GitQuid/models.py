@@ -1,24 +1,3 @@
-"""
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-ALL SLUGS AND NO CSS MADE POV A DULL BOY
-"""
-
-
-
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
@@ -27,6 +6,7 @@ from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from django.urls import reverse
 import itertools
+
 
 # Django creates primary key automatically if not specified btw
 # on_delete=models.PROTECT - Django 2.0 requires that
@@ -58,9 +38,11 @@ class UserProfile(models.Model):
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True, null=True)
 
-    # ensures unique slug. Doesn't us pk because pk can be none sometimes
+    # ensures unique slug (concat with id in case there are similar username which only differ by lower/upper cases)
     def save(self, *args, **kwargs):
-        self.slug = slugify(''.join([str(self.user.username), '-', str(len(UserProfile.objects.all()))]))
+        # this is good enough as changing username is not allowed, therefore, the slug will be constant
+        # and urls won't break
+        self.slug = slugify(''.join([str(self.user.username), '-', str(self.user.id)]))
         super(UserProfile, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -76,7 +58,8 @@ class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     maxLen = 200
     name = models.CharField(max_length=maxLen)
-    slug = models.SlugField(max_length=(maxLen+50), unique=True, null=True)
+    # __current_name = None
+    slug = models.SlugField(max_length=(maxLen + 50), unique=True, null=True)
     date = models.DateTimeField(default=timezone.now())
     description = models.CharField(max_length=maxLen, blank=True, default='')
     title_image = models.ImageField(upload_to='title_images', blank=True, null=True)
@@ -88,25 +71,28 @@ class Project(models.Model):
     # for internal use only. Sum of all donations to this project
     donations = models.FloatField(default=0, blank=True)
 
-    @property
-    def formatted_markdown(self):
-        return markdownify(self.body)
-    # ensures unique slug. Doesn't us pk because pk can be none sometimes
+    # def __init__(self, *args, **kwargs):
+    #     super(Project, self).__init__(*args, **kwargs)
+    #     self.__current_name = self.name
+
+    # ensures unique slug. Slug is changed if project name is changed
     def save(self, *args, **kwargs):
-        self.slug = slugify(''.join([self.name, "-", str(len(Project.objects.all()))]))
-        #  Buggy then saving the same object multiple times
-        # s = ''
-        # count = ''
-        # for i in itertools.count(0, -1):
-        #     s = slugify(''.join((self.name, str(count))))
-        #     if not Project.objects.filter(slug=s):
-        #         break
-        #     count = i
-        # self.slug = s
+        # if model was just created
+        # Sauce: https://stackoverflow.com/questions/2307943/django-overriding-the-model-create-method
+        print(self.id)
+        if self.id is None:
+            # save to make sure that project has id
+            super(Project, self).save(*args, **kwargs)
+        self.slug = slugify(''.join([self.name, "-", str(self.id)]))
         super(Project, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.name
+
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.body)
 
 
 class Donation(models.Model):

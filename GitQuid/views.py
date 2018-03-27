@@ -324,6 +324,12 @@ def user_logout(request):
 
 @login_required()
 def editProfile(request, slug):
+    # if user who is not logged in is typing using url which would edit another user's profile
+    if request.user.userprofile.slug != slug:
+        print("Redirecting to view account as this not belongs to you") # rip my london at this point aylamo
+        return HttpResponseRedirect(
+            reverse('GitQuid:account', kwargs={'slug': request.user.userprofile.slug}))
+
     if request.method == 'POST':
 
         form = EditProfileForm(data=request.POST, instance=request.user)
