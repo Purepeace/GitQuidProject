@@ -19,6 +19,13 @@
     {% if accUser.username == curUser.username %}
         <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:editProfile' accUser.userprofile.slug %}">Make Changes</a>
     {% endif %}
+
+        YOUR PROJECTS:
+        {% for project in projects_list %}
+
+       <br/> {{project}}
+
+        {% endfor %}
     </div>
 
 {% endblock %}

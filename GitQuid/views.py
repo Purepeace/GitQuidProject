@@ -62,6 +62,10 @@ def index(request):
 def account(request, slug):
     context_dic = {'accUser': None, 'curUser': request.user}
     au = get_object_or_404(UserProfile, slug=slug)
+
+    if au.user:
+        projects_list=Project.objects.filter(user=au.user)
+        context_dic['projects_list'] = projects_list
     context_dic['accUser'] = au.user
     response = render(request, 'GitQuid/account.html', context_dic)
     return response
