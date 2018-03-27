@@ -1,10 +1,11 @@
-{#{% extends 'GitQuid/base.html' %}#}
+{% extends 'GitQuid/base.html' %}#}
 
 {% block title_block %}
     {{ project.name }}
 {% endblock %}
 
 {% block body_block %}
+<div style="color:#c6c8ca;text-align:center">
     {% if project.published or author %}
         {# load static files later to avoid spoilers#}
         {% load staticfiles %}
@@ -48,8 +49,10 @@
     {% else %}
 
         <div>
-            Project is here but it's not published yet.
+            Project is here but it is not published yet.
         </div>
 
     {% endif %}
+
+    </div>
 {% endblock %}
