@@ -6,14 +6,17 @@
 
 
 {% block body_block %}
-    <div style="color: #c6c8ca" align="center">
-        YOUR DETAILS: <br/>
-        USERNAME: {{ user.username }}<br/>
-        {% if user.userprofile.picture.url != null %}
-            <img src="{{ user.userprofile.picture.url }}" alt="User Profile Picture" width="100px"/><br/>
+    <div align=center>
+        {{ accUser.username }}'s DETAILS: <br/>
+        USERNAME: {{ accUser.username }}<br/>
+        {% if accUser.userprofile.picture.url != null %}
+            <img src="{{ accUser.userprofile.picture.url }}" alt="User Profile Picture" width="100px"/><br/>
         {% endif %}
-        EMAIL: {{ user.email }}<br/>
-        DESCRIPTION: {{ user.userprofile.description }}<br/>
+        EMAIL: {{ accUser.email }}<br/>
+        DESCRIPTION: {{ accUser.userprofile.description }}<br/>
     </div>
+    {% if accUser.username == curUser.username %}
+        <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:editProfile' accUser.userprofile.slug %}">Make Changes</a>
+    {% endif %}
 
 {% endblock %}
