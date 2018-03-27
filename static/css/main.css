@@ -7,7 +7,143 @@ body {
 }
 
 .boxed {
+    border: 1px solid green;body {
+  font-family: 'Lora';
+  background: linear-gradient(rgba(47, 23, 15, 0.65), rgba(47, 23, 15, 0.65)), url("niharika_art.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.boxed {
     border: 1px solid green;
+}
+
+.wrapper {
+    margin-top: 200px
+
+}
+
+
+#login_form {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    font-family: CenturyGothic;
+    color: #cccccc;
+
+}
+
+#post_form{
+    margin-top: 200px
+}
+
+.tab {
+    background: #ecf0f1;
+    border: #ccc 1px solid;
+    border-bottom: #ccc 2px solid;
+    padding: 2px;
+    width: 250px;
+    color: #AAAAAA;
+    margin-top: 10px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+#signin{
+    position: fixed;
+    top: 140px;
+    right: 180px;
+    font-family: CenturyGothic;
+}
+
+li{
+    display: inline;
+}
+
+#signup {
+    /*width: 170px;*/
+    /*position: absolute;*/
+    /*top: 135px;*/
+    /*left: 1050px;*/
+    position:fixed;
+    top:140px;
+    right:60px;
+
+}
+
+#position4 {
+
+    width: 170px;
+    position: absolute;
+    top: 150px;
+    left: 1190px;
+
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+#position5 {
+
+    width: 170px;
+    position: absolute;
+    top: 130px;
+    left: 190px;
+
+}
+
+#position6 {
+
+    width: 170px;
+    position: absolute;
+    top: 100px;
+    left: 190px;
+
+}
+
+#position7 {
+
+    width: 250px;
+    position: absolute;
+    top: 200px;
+    left: 10px;
+    font-size: 20px;
+
+}
+
+#position8 {
+
+    width: 170px;
+    position: absolute;
+    top: 70px;
+    left: 190px;
+
+}
+
+#position9 {
+    /*align: center*/
+    /*text-align: center;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*display: block;*/
+    /*margin: 0 auto;*/
+    width: 170px;
+    position: relative;
+
+    /*top: 650px;*/
+    /*right: -10px*/
+    /*left: 20px;*/
+
+}
+
 }
 
 .wrapper {

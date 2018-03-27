@@ -57,9 +57,13 @@ def index(request):
     return response
 
 
-def account(request):
-    response = render(request, 'GitQuid/account.html')
+def account(request, slug):
+    context_dic = {'accUser': None, 'curUser': request.user}
+    au = get_object_or_404(UserProfile, slug=slug)
+    context_dic['accUser'] = au.user
+    response = render(request, 'GitQuid/account.html', context_dic)
     return response
+
 
 def about(request):
     response = render(request, 'GitQuid/about.html')
@@ -72,7 +76,7 @@ def projectPage(request, slug):
         project = get_object_or_404(Project, slug=slug)
         context_dic['project'] = project
         context_dic['leftToGoal'] = max(0, project.goal - project.donations)
-        context_dic['percentCollected'] = round(project.donations/project.goal*100, 2)
+        context_dic['percentCollected'] = round(project.donations / project.goal * 100, 2)
         # not implemented yet
         context_dic['donations'] = Donation.objects.filter(project=project)
         if request.user.is_authenticated and request.user == project.user:
@@ -193,11 +197,19 @@ def show_category(request, category_name_slug):
 def addProject(request):
     context_dict = {}
     if request.method == "POST":
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             p = form.save(commit=False)
             p.user_id = request.user.id
             p.published_date = timezone.now()
+
+            for key, value in request.POST.items():
+                print(key, value)
+
+            if 'title_image' in request.FILES:
+                p.title_image = request.FILES['title_images']
+                print("labas")
+
             p.save()
             return redirect('/GitQuid/browseProjects/')
         else:
@@ -232,7 +244,6 @@ def browseProjects(request):
         # Update Project model with sum of donations
         p = Project.objects.get(id=project.id)
         p.donations = donation_sum
-        p.save()
 
     # Get parameter by which projects are going to be sorted
     sort = request.GET.get('sort', 'name')
@@ -255,7 +266,6 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-
 
             profile = profile_form.save(commit=False)
             profile.user = user
@@ -304,23 +314,27 @@ def user_logout(request):
     logout(request)
     # Take the user back to the homeproject.
     return HttpResponseRedirect(reverse('index'))
+
+
 #
 #
 #
 
-
-def editProfile(request):
+@login_required()
+def editProfile(request, slug):
     if request.method == 'POST':
 
-        form = EditProfileForm(request.POST, instance=request.user)
-        otherform = EditRestForm(request.POST, instance=request.user)
+        form = EditProfileForm(data=request.POST, instance=request.user)
+        otherform = EditRestForm(data=request.POST, instance=request.user.userprofile)
 
         if form.is_valid() and otherform.is_valid():
             form.save()
-            return redirect('/GitQuid/account')
+            otherform.save()
+            return HttpResponseRedirect(
+                reverse('GitQuid:account', kwargs={'slug': request.user.userprofile.slug}))
 
     else:
         form = EditProfileForm(instance=request.user)
-        otherform = EditRestForm(instance=request.user)
-        context_dict = {'form': form, 'otherform':otherform}
-        return render(request, 'GitQuid/edit.html', context_dict)
+        otherform = EditRestForm(instance=request.user.userprofile)
+        context_dict = {'form': form, 'otherform': otherform}
+        return render(request, 'GitQuid/editProfile.html', context_dict)

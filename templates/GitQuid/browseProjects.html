@@ -67,6 +67,7 @@
         {% for project in projects %}
             <li>
                 <h3>{{ project }}</h3>
+                {{ project.title_image }}
                 {#                <div class="boxed">#}
                 {{ project.body }}
                 <small>{{ project.date }}</small>

@@ -55,7 +55,7 @@ class ProjectForm(forms.ModelForm):
     description = forms.CharField(label="Short description:", max_length=Project.maxLen, required=False,
                                   widget=forms.TextInput(attrs={
                                       'placeholder': "This will be displayed on browsing page. Think how you would attract potential donations"}))
-    title_image = forms.ImageField(label="Title image:", required=False)
+    #title_image = forms.ImageField(label="Title image:", required=False)
     # don't know how to replicate widget like default one. NEEDS FIXING, KEY FEATURE, CAN'T HAVE WEBSITE WITHOUT IT
     # category = forms.CheckboxSelectMultiple(label="Category*:")
     body = MarkdownxFormField(label="Long description:", required=False,
@@ -71,13 +71,15 @@ class ProjectForm(forms.ModelForm):
     #     self.fields['body'].label = "Describe your project"
     #     self.fields['goal'].label = "Set the money goal for your project"
 
-
-
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
         fields = ('name', 'description', 'title_image', 'category', 'body', 'goal')
+        widgets = {
 
+            'title_image': forms.FileInput(attrs={'class': 'custom-file', 'id': "custom-file"}),
+
+        }
 
     def clean(self):
         cleaned_data = super(ProjectForm, self).clean()
@@ -89,32 +91,23 @@ class ProjectForm(forms.ModelForm):
             )
 
 
-class EditProfileForm(UserChangeForm):
-
+class EditProfileForm(forms.ModelForm):
     class Meta:
-
         model = User
 
-        fields = {
+        fields = (
             'email',
-            'password',
 
-        }
+        )
 
 
-class EditRestForm(UserChangeForm):
 
+class EditRestForm(forms.ModelForm):
     class Meta:
-
         model = UserProfile
 
-        fields = {
+        fields = (
 
             'picture',
             'description',
-            'password',
-
-        }
-
-
-
+        )
