@@ -180,14 +180,16 @@ def browseProjects(request):
     projects = Project.objects.all()
     donations = Donation.objects.all()
 
-    for project in projects:
-        donation_sum = 0
-        for donation in donations:
-            if project.name == donation.project.name:
-                donation_sum += donation.amount
-        # Update Project model with sum of donations
-        p = Project.objects.get(id=project.id)
-        p.donations = donation_sum
+    # Updated with better solution
+
+    # for project in projects:
+    #     donation_sum = 0
+    #     for donation in donations:
+    #         if project.name == donation.project.name:
+    #             donation_sum += donation.amount
+    #     # Update Project model with sum of donations
+    #     p = Project.objects.get(id=project.id)
+    #     p.donations = donation_sum
 
     # Get parameter by which projects are going to be sorted
     sort = request.GET.get('sort', 'name')
@@ -262,9 +264,9 @@ def viewProject(request, slug):
             f.user_id = request.user.id
             f.project_id = project.id
             f.save()
-            donation = form.instance
-            updatedDonations = project.donations + donation.amount
-            Project.objects.filter(id=project.id).update(donations=updatedDonations)
+            # donation = form.instance
+            # updatedDonations = project.donations + donation.amount
+            # Project.objects.filter(id=project.id).update(donations=updatedDonations)
             return HttpResponseRedirect(reverse('GitQuid:viewProject', kwargs={'slug': slug}))
     else:
         context_dic['project'] = project
