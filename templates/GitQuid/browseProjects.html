@@ -69,6 +69,7 @@
                 <li>
                     <h3>{{ project }}</h3>
                    <br/> <img src="/media/{{ project.title_image }}"> <br/>
+                    </a>
                     {#                <div class="boxed">#}
                     {{ project.body }}<br/>
                     <small>{{ project.date }}</small><br/>
@@ -76,7 +77,7 @@
                     Category: {{ project.category }}<br/>
                     {#                </div>#}
                 </li>
-            </a>
+
         {% endfor %}
 
         {#    {{ form.color }}#}

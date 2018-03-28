@@ -7,26 +7,27 @@
 
 {% block body_block %}
     <div style="color: #c6c8ca" align="center">
-        {{ accUser.username }}'s DETAILS: <br/>
-        USERNAME: {{ accUser.username }}<br/>
+        <div><h1> {{ accUser.username }}'s Details: <br/></h1></div>
+        <h5>USERNAME</h5> {{ accUser.username }}<br/>
         {% if accUser.userprofile.picture.url != null %}
             <img src="{{ accUser.userprofile.picture.url }}" alt="User Profile Picture" width="100px"/><br/>
         {% endif %}
-        EMAIL: {{ accUser.email }}<br/>
-        DESCRIPTION: {{ accUser.userprofile.description }}<br/>
-    </div>
-    <div style="color: #c6c8ca">
-        {% if accUser.username == curUser.username %}
-            <a class="nav-link text-uppercase text-expanded"
-               href="{% url 'GitQuid:editProfile' accUser.userprofile.slug %}">Make Changes</a>
-        {% endif %}
+     <h5>EMAIL</h5> {{ accUser.email }}<br/>
+         <br/><h5>DESCRIPTION</h5> {{ accUser.userprofile.description }}<br/>
 
-        YOUR PROJECTS:
+         <br/><h5>YOUR PROJECTS</h5>
         {% for project in projects_list %}
             <a href="{% url 'GitQuid:viewProject' project.slug %}">
                 <br/> {{ project }}
             </a>
         {% endfor %}
-    </div>
+        </div>
+
+        {% if accUser.username == curUser.username %}
+            <form action="{% url 'GitQuid:editProfile' accUser.userprofile.slug %}">
+                <input type="submit" value="Edit Your Information">
+            </form>
+
+        {% endif %}
 
 {% endblock %}
