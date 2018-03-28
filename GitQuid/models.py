@@ -96,7 +96,7 @@ class Project(models.Model):
 
 
 class Donation(models.Model):
-    userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     project = models.ForeignKey(Project, on_delete=models.PROTECT)
     amount = models.FloatField()
     date = models.DateTimeField(default=timezone.now())

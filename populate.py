@@ -123,11 +123,11 @@ def populate():
     p3.save()
 
     # User makes a donation and donation goes to a project
-    d = Donation(userProfile=up, project=p, amount=123.99, date=timezone.now(), comment="Good project")
+    d = Donation(user=u, project=p, amount=123.99, date=timezone.now(), comment="Good project")
     d.save()
-    d2 = Donation(userProfile=up, project=p2, amount=419.99, date=timezone.now(), comment="Awesome project")
+    d2 = Donation(user=u, project=p2, amount=419.99, date=timezone.now(), comment="Awesome project")
     d2.save()
-    d3 = Donation(userProfile=up, project=p3, amount=1337.00, date=timezone.now(), comment="Amazing project")
+    d3 = Donation(user=u, project=p3, amount=1337.00, date=timezone.now(), comment="Amazing project")
     d3.save()
 
 

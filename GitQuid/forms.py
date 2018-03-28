@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import *
-from GitQuid.models import UserProfile, Category, Project
+from GitQuid.models import *
 from markdownx.fields import MarkdownxFormField
 from django.contrib.auth.forms import UserChangeForm
 
@@ -110,3 +110,12 @@ class ProjectForm(forms.ModelForm):
             'title_image': forms.FileInput(attrs={'class': 'custom-file', 'id': "custom-file"}),
 
         }
+
+
+class DonationForm(forms.ModelForm):
+    amount = forms.FloatField(label="Amount")
+    comment = forms.CharField(label="Leave a feedback", max_length=Donation.comMaxLen, required=False,
+                              widget=forms.Textarea())
+    class Meta:
+        model = Donation
+        fields = ('amount', 'comment')

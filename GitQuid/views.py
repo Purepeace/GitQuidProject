@@ -199,8 +199,6 @@ def browseProjects(request):
     return render(request, 'GitQuid/browseProjects.html', context_dict)
 
 
-
-
 @login_required()
 def addProject(request):
     context_dic = {'form': None}
@@ -250,21 +248,31 @@ def editProject(request, slug):
 
 
 def viewProject(request, slug):
-    context_dic = {'project': None, 'donations': None, 'author': False, 'leftToGoal': 0.0, 'percentCollected': 0.0}
-    try:
-        project = get_object_or_404(Project, slug=slug)
+    context_dic = {'project': None, 'donations': None, 'form': None, 'authenticated': False, 'author': False, 'leftToGoal': 0.0,
+                   'percentCollected': 0.0}
+    project = get_object_or_404(Project, slug=slug)
+    if request.user.is_authenticated:
+        context_dic['authenticated'] = True
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = DonationForm(data=request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.date = timezone.now()
+            f.user_id = request.user.id
+            f.project_id = project.id
+            f.save()
+            return HttpResponseRedirect(reverse('GitQuid:viewProject', kwargs={'slug': slug}))
+    else:
         context_dic['project'] = project
         context_dic['leftToGoal'] = max(0, project.goal - project.donations)
         context_dic['percentCollected'] = round(project.donations / project.goal * 100, 2)
-        # not implemented yet
+        # show donations are not implemented yet
         context_dic['donations'] = Donation.objects.filter(project=project)
+        context_dic['form'] = DonationForm()
         if request.user.is_authenticated and request.user == project.user:
             context_dic['author'] = True
-
-    except Project.DoesNotExist:
-        print("Project does not exist")
-        # return redirect('index')
-    return render(request, 'GitQuid/viewProject.html', context_dic)
+        return render(request, 'GitQuid/viewProject.html', context_dic)
 
 
 def register(request):
@@ -319,11 +327,10 @@ def account(request, slug):
     context_dic = {'accUser': None, 'curUser': request.user}
     au = get_object_or_404(UserProfile, slug=slug)
     if au.user:
-        projects_list=Project.objects.filter(user=au.user)
+        projects_list = Project.objects.filter(user=au.user)
         context_dic['projects_list'] = projects_list
     context_dic['accUser'] = au.user
     return render(request, 'GitQuid/account.html', context_dic)
-
 
 
 #

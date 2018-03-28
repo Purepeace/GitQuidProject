@@ -42,9 +42,16 @@
             </div>
             <div id="goal">
                 Aiming for: {{ project.goal }}£ in total
+            {% if authenticated %}
+            <div>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">DONATE!</button>
+                </form>
             </div>
+            {% endif %}
 
-            <button type="submit">DONATE!(not working yet)</button>
 
 
         {% else %}
