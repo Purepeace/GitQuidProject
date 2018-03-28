@@ -101,10 +101,11 @@ class ProjectForm(forms.ModelForm):
                                   'placeholder': "Supports markdown! Also it autosaves! (if us lazy cunts will implement ajax lol)(also, succ a ducc, kickstarter)"}))
     goal = forms.FloatField(label="How much Quid do you wanna Git?")
 
+
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
-        fields = ('name', 'description', 'title_image', 'body', 'goal')
+        fields = ('name', 'description', 'title_image', 'body', 'goal', 'published')
         widgets = {
 
             'title_image': forms.FileInput(attrs={'class': 'custom-file', 'id': "custom-file"}),

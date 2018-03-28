@@ -234,7 +234,10 @@ def editProject(request, slug):
         if request.method == "POST":
             form = ProjectForm(request.POST, request.FILES, instance=project)
             if form.is_valid():
-                form.save()
+                f = form.save(commit=False)
+                if project.published:
+                    f.datePublished = timezone.now()
+                f.save()
                 # redirect to the same page
                 return HttpResponseRedirect(reverse('GitQuid:editProject', kwargs={'slug': slug}))
             else:
