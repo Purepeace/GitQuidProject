@@ -67,14 +67,18 @@ class Project(models.Model):
     body = MarkdownxField(blank=True, default='')
     published = models.BooleanField(default=False)
     # change
-    goal = models.FloatField(default=-69)
+    goal = models.FloatField(default=1)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # for internal use only. Sum of all donations to this project
     donations = models.FloatField(default=0, blank=True)
 
-    # def __init__(self, *args, **kwargs):
-    #     super(Project, self).__init__(*args, **kwargs)
-    #     self.__current_name = self.name
+    # Returns summed up donations but does NOT update them
+    def sumUpDonations(self):
+        donations = Donation.objects.filter(project=self.id)
+        sum = 0
+        for donation in donations:
+            sum += donation.amount
+        return sum
 
     # ensures unique slug. Slug is changed if project name is changed
     def save(self, *args, **kwargs):
@@ -85,7 +89,6 @@ class Project(models.Model):
             super(Project, self).save(*args, **kwargs)
         self.slug = slugify(''.join([self.name, "-", str(self.id)]))
         super(Project, self).save(*args, **kwargs)
-
 
     def __str__(self):
         return self.name
@@ -103,7 +106,15 @@ class Donation(models.Model):
     comMaxLen = 200
     comment = models.CharField(max_length=comMaxLen, blank=True, default='')
 
+    # Update project.donations if donations is being created.
+    # (donation should be changed after it's been commited anyway)
+    def save(self, *args, **kwargs):
+        if self.id is None:
+            super(Donation, self).save(*args, **kwargs)
+            updatedDonations = self.project.donations + self.amount
+            Project.objects.filter(id=self.project.id).update(donations=updatedDonations)
+
+        super(Donation, self).save(*args, **kwargs)
+
     def __str__(self):
         return str(self.amount) + ' to ' + str(self.project) + ' at ' + str(self.date)[:16]
-
-
