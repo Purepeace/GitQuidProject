@@ -238,8 +238,8 @@ def editProject(request, slug):
                 if project.published:
                     f.datePublished = timezone.now()
                 f.save()
-                # redirect to the same page
-                return HttpResponseRedirect(reverse('GitQuid:editProject', kwargs={'slug': slug}))
+
+                return HttpResponseRedirect(reverse('GitQuid:viewProject', kwargs={'slug': slug}))
             else:
                 print(form.errors)
         else:
