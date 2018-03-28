@@ -1,6 +1,6 @@
 form {
     background: #CC3434;
-    opacity: 0.3;
+    
     padding: 10px;
 }
 #markdownHelp {
@@ -11,7 +11,7 @@ textarea {
 }
 
 .viewInfo {
-    opacity: 0.3;
+
     background: #CC3434;
 }
 
