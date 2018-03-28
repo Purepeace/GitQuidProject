@@ -262,6 +262,9 @@ def viewProject(request, slug):
             f.user_id = request.user.id
             f.project_id = project.id
             f.save()
+            donation = form.instance
+            updatedDonations = project.donations + donation.amount
+            Project.objects.filter(id=project.id).update(donations=updatedDonations)
             return HttpResponseRedirect(reverse('GitQuid:viewProject', kwargs={'slug': slug}))
     else:
         context_dic['project'] = project
