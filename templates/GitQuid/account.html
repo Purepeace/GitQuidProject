@@ -6,7 +6,7 @@
 
 
 {% block body_block %}
-        <div style="color: #c6c8ca" align="center">
+    <div style="color: #c6c8ca" align="center">
         {{ accUser.username }}'s DETAILS: <br/>
         USERNAME: {{ accUser.username }}<br/>
         {% if accUser.userprofile.picture.url != null %}
@@ -16,15 +16,16 @@
         DESCRIPTION: {{ accUser.userprofile.description }}<br/>
     </div>
     <div style="color: #c6c8ca">
-    {% if accUser.username == curUser.username %}
-        <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:editProfile' accUser.userprofile.slug %}">Make Changes</a>
-    {% endif %}
+        {% if accUser.username == curUser.username %}
+            <a class="nav-link text-uppercase text-expanded"
+               href="{% url 'GitQuid:editProfile' accUser.userprofile.slug %}">Make Changes</a>
+        {% endif %}
 
         YOUR PROJECTS:
         {% for project in projects_list %}
-
-       <br/> {{project}}
-
+            <a href="{% url 'GitQuid:viewProject' project.slug %}">
+                <br/> {{ project }}
+            </a>
         {% endfor %}
     </div>
 

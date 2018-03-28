@@ -111,26 +111,23 @@ def populate():
 
     # User creates a project
     p = Project(user=u, name="Awesome project", body=loremWithMarkdown,
-                category=c, date=datetime.datetime(2015, 12, 1, 23, 59))
+                category=c,  dateCreated=datetime.datetime(2015, 12, 1, 23, 59))
     p.save()
 
     p2 = Project(user=u, name="Wonderful project", body="We need money",
-                 category=c2, date=datetime.datetime(2019, 12, 1, 23, 59))
+                 category=c2, dateCreated=datetime.datetime(2019, 12, 1, 23, 59))
     p2.save()
 
     p3 = Project(user=u, name="Decent project", body="Please donate",
-                 category=c3, date=datetime.datetime(2012, 12, 1, 23, 59))
+                 category=c3, dateCreated=datetime.datetime(2012, 12, 1, 23, 59))
     p3.save()
 
-    # User ads some pictures to the project
-    Media(project=p, media=b"asdf", tag="picture0").save()
-    Media(project=p, media=b"qwerty", tag="picture1").save()
     # User makes a donation and donation goes to a project
-    d = Donation(userProfile=up, project=p, amount=123.99, date=timezone.now(), comment="Good project")
+    d = Donation(user=u, project=p, amount=123.99, date=timezone.now(), comment="Good project")
     d.save()
-    d2 = Donation(userProfile=up, project=p2, amount=419.99, date=timezone.now(), comment="Awesome project")
+    d2 = Donation(user=u, project=p2, amount=419.99, date=timezone.now(), comment="Awesome project")
     d2.save()
-    d3 = Donation(userProfile=up, project=p3, amount=1337.00, date=timezone.now(), comment="Amazing project")
+    d3 = Donation(user=u, project=p3, amount=1337.00, date=timezone.now(), comment="Amazing project")
     d3.save()
 
 

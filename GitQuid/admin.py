@@ -6,5 +6,4 @@ from markdownx.admin import MarkdownxModelAdmin
 
 admin.site.register(UserProfile)
 admin.site.register(Donation)
-admin.site.register(Media)
 admin.site.register(Project, MarkdownxModelAdmin)

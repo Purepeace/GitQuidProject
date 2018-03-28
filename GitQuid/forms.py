@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import *
-from GitQuid.models import UserProfile, Category, Project
+from GitQuid.models import *
 from markdownx.fields import MarkdownxFormField
 from django.contrib.auth.forms import UserChangeForm
 
@@ -49,26 +49,6 @@ class UserProfileForm(forms.ModelForm):
         fields = ('picture', 'description')
 
 
-class ProjectForm(forms.ModelForm):
-    name = forms.CharField(label="Title of the project*:", max_length=Project.maxLen,
-                           widget=forms.TextInput(attrs={'placeholder': "(it will be displayed on search page, duh)"}))
-    description = forms.CharField(label="Short description:", max_length=Project.maxLen, required=False,
-                                  widget=forms.TextInput(attrs={
-                                      'placeholder': "This will be displayed on browsing page. Think how you would attract potential donations"}))
-    title_image = forms.ImageField(label="Title image:", required=False)
-    # category = forms.CheckboxSelectMultiple(label="Category*:")
-
-    body = MarkdownxFormField(label="Long description:", required=False,
-                              widget=forms.TextInput(attrs={
-                                  'placeholder': "Supports markdown! Also it autosaves! (if us lazy cunts will implement ajax lol)(also, succ a ducc, kickstarter)"}))
-    goal = forms.FloatField(label="How much Quid do you wanna Git?")
-
-    class Meta:
-        # Provide an association between the ModelForm and a model
-        model = Project
-        fields = ('name', 'description', 'title_image', 'category', 'body', 'goal')
-
-
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
@@ -88,3 +68,54 @@ class EditRestForm(forms.ModelForm):
             'picture',
             'description',
         )
+
+
+class AddProjectForm(forms.ModelForm):
+    name = forms.CharField(label="Title of the project:", max_length=Project.maxLen)
+
+    class Meta:
+        model = Project
+        fields = ('name', 'category')
+
+    def clean(self):
+        cleaned_data = super(AddProjectForm, self).clean()
+        # Validates if category actually exists. Needed cuz post could be tampered with.
+        cat = cleaned_data.get('category')
+        if not Category.objects.filter(name=cat):
+            raise forms.ValidationError(
+                "No such category exists, you cheeky hacker"
+            )
+
+
+class ProjectForm(forms.ModelForm):
+    name = forms.CharField(label="Title of the project:", max_length=Project.maxLen,
+                           widget=forms.TextInput(attrs={'placeholder': "(it will be displayed on search page, duh)"}))
+    description = forms.CharField(label="Short description:", max_length=Project.maxLen, required=False,
+                                  widget=forms.TextInput(attrs={
+                                      'placeholder': "This will be displayed on browsing page. Think how you would attract potential donations"}))
+    title_image = forms.ImageField(label="Title image:", required=False)
+    # category = forms.CheckboxSelectMultiple(label="Category*:")
+
+    body = MarkdownxFormField(label="Long description:", required=False,
+                              widget=forms.TextInput(attrs={
+                                  'placeholder': "Supports markdown! Also it autosaves! (if us lazy cunts will implement ajax lol)(also, succ a ducc, kickstarter)"}))
+    goal = forms.FloatField(label="How much Quid do you wanna Git?")
+
+    class Meta:
+        # Provide an association between the ModelForm and a model
+        model = Project
+        fields = ('name', 'description', 'title_image', 'body', 'goal')
+        widgets = {
+
+            'title_image': forms.FileInput(attrs={'class': 'custom-file', 'id': "custom-file"}),
+
+        }
+
+
+class DonationForm(forms.ModelForm):
+    amount = forms.FloatField(label="Amount")
+    comment = forms.CharField(label="Leave a feedback", max_length=Donation.comMaxLen, required=False,
+                              widget=forms.Textarea())
+    class Meta:
+        model = Donation
+        fields = ('amount', 'comment')

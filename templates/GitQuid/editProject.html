@@ -1,0 +1,25 @@
+{#{% extends 'GitQuid/base.html' %}#}
+{% load staticfiles %}
+
+{% block title_block %}
+    Edit Project
+{% endblock %}
+
+{% block body_block %}
+    {#align= is no longer supported in HTML 5. Use css instead#}
+    {#    DONT LEAVE CSS INLINE OF HTML#}
+    {#    <div style="color: #c6c8ca; text-align:center">#}
+    <div>
+        <form id="post_form" method="POST" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" placeholder="submit" title="Just Do It" value="SUBMIT" id="position9"/>
+        </form>
+        {{ form.media }}
+    </div>
+    <a href="{% url 'GitQuid:viewProject' project.slug %}">View project</a>
+    <br>
+    <br>
+    <a href="{% url 'GitQuid:browseProjects' %}">Back to projects</a>
+
+{% endblock %}

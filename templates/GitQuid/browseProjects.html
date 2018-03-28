@@ -65,17 +65,18 @@
         {#        </div>#}
 
         {% for project in projects %}
-            <li>
-                <h3>{{ project }}</h3>
-
-                <br/><img src="/media/{{ project.title_image }}" alt="project image" width="300px" height="200px"><br/>
-                {#                <div class="boxed">#}
-                Category: {{ project.category }}<br/>
-                {{ project.body }}<br/>
-                £{{ project.donations }}<br/>
-                <small>{{ project.date }}</small><br/>
-                {#                </div>#}
-            </li>
+            <a href="{% url 'GitQuid:viewProject' project.slug %}">
+                <li>
+                    <h3>{{ project }}</h3>
+                   <br/> <img src="/media/{{ project.title_image }}"> <br/>
+                    {#                <div class="boxed">#}
+                    {{ project.body }}<br/>
+                    <small>{{ project.date }}</small><br/>
+                    £{{ project.donations }}<br/>
+                    Category: {{ project.category }}<br/>
+                    {#                </div>#}
+                </li>
+            </a>
         {% endfor %}
 
         {#    {{ form.color }}#}
