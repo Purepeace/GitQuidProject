@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load staticfiles %}
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,14 +13,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 
     <title>
@@ -32,41 +33,44 @@
 
 
 {% block header_block %}
-   <h1 class="site-heading text-center text-white d-none d-lg-block">
-      <span class="site-heading-upper text-primary mb-3">Lend A Hand</span>
-      <span class="site-heading-lower">GitQuid</span>
+    <h1 class="site-heading text-center text-white d-none d-lg-block">
+        <span class="site-heading-upper text-primary mb-3">Lend A Hand</span>
+        <span class="site-heading-lower">GitQuid</span>
     </h1>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Help Your Community</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:index' %}">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:about' %}">About</a>
-            </li>
-            <li class="nav-item px-lg-4">
+        <div class="container">
+            <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Help Your
+                Community</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:index' %}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:about' %}">About</a>
+                    </li>
+                    <li class="nav-item px-lg-4">
 
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' %}">Projects</a>
-            </li>
-            <li class="nav-item px-lg-4">
-                {% if user.is_authenticated %}
-                {% else %}
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up Here</a>
-                {% endif %}
-            </li>
-          </ul>
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' %}">Projects</a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        {% if user.is_authenticated %}
+                        {% else %}
+                            <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up
+                                Here</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
 
@@ -78,49 +82,49 @@
 
 {% block login_block %}
 
-        {% if user.is_authenticated %}
-<div id="header">
+    {% if user.is_authenticated %}
+        <div id="header">
 
             <form action="{% url 'GitQuid:logout' %}">
                 <input type="submit" value="LOGOUT">
             </form>
             <form action="{% url 'GitQuid:account' user.userprofile.slug %}">
-                <input type="submit" value="MY ACCOUNT" >
+                <input type="submit" value="MY ACCOUNT">
             </form>
 
             <form action="{% url 'GitQuid:addProject' %}">
                 <input type="submit" value="ADD PROJECT">
             </form>
-</div>
-    <footer class="footer text-faded text-center py-5">
-      <div class="container">
-        <p class="m-0 small">This website was made by Lab 6 Group C</p>
-      </div>
-    </footer>
-        {% else %}
-            <div>
-
-                <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
-                    {% csrf_token %}
-                    <div id="position">Username</div>
-                    <input type="text" name="username" value="" size="50" class="tab"/> <br/>
-                    <div id="position2">Password</div>
-                    <br/>
-                    <input type="password" name="password" value="" size="50" class="tab"/> <br/>
-                    <input id="signin" type="submit" value="Sign In"/>
-
-                </form>
+        </div>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container">
+                <p class="m-0 small">This website was made by Lab 6 Group C</p>
             </div>
-<footer class="footer text-faded text-center py-5">
-      <div class="container">
-        <p class="m-0 small">This website was made by Lab 6 Group C</p>
-      </div>
-    </footer>
+        </footer>
+    {% else %}
+        <div>
+
+            <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
+                {% csrf_token %}
+                <div id="position">Username</div>
+                <input type="text" name="username" value="" size="50" class="tab"/> <br/>
+                <div id="position2">Password</div>
+                <br/>
+                <input type="password" name="password" value="" size="50" class="tab"/> <br/>
+                <input id="signin" type="submit" value="Sign In"/>
+
+            </form>
+        </div>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container">
+                <p class="m-0 small">This website was made by Lab 6 Group C</p>
+            </div>
+        </footer>
 
 
 
-        {% endif %}
-    {% endblock %}
+    {% endif %}
+{% endblock %}
 
 
 
@@ -128,5 +132,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+
+{% block customExtFiles %}
+{% endblock %}
+
 
 </html>

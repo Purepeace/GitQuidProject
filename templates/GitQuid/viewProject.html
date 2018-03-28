@@ -6,59 +6,62 @@
 
 {% block body_block %}
     {#<div style="color:#c6c8ca;text-align:center">#}
-    <div>
-        {% if project.published or author %}
-            {# load static files later to avoid spoilers#}
-            {% load staticfiles %}
+    {% if project.published or author %}
+        {# load static files later to avoid spoilers#}
+        {% load staticfiles %}
+        <div class="viewInfo">
 
-            {% if not project.published %}
-                <div>
-                    <srong>S u p</srong>
-                    , {{ project.user }}. Project is still not available to the public. Take your time.
-                    <a href="{% url 'GitQuid:editProject' project.slug %}">Edit project</a>
-                </div>
-            {% else %}
-                <div>
-                    <srong>Hey</srong>
-                    , {{ project.user }}. Project is up and running. Good luck!
-                </div>
-            {% endif %}
-            <h2>{{ project.name }}</h2>
-            <h4><i>Author's profile:</i>
-                {# needs users slugs to work           <a href="{% url 'GitQuid:account' project.user %}">{{ project.user }}</a>#}
-            </h4>
-
-            <div id="projectBody">
-                {# Sauce: https://stackoverflow.com/questions/42416123/i-cant-understand-the-django-markdownxs-usage#}
-                {{ project.formatted_markdown|safe }}
-            </div>
-
-            <br>
-            <div id="collected">
-                Collected:{{ project.donations }}£ ({{ percentCollected }}%)
-            </div>
-            <div id="leftToGoal">
-                Only {{ leftToGoal }}£ to go!
-            </div>
-            <div id="goal">
-                Aiming for: {{ project.goal }}£ in total
-            {% if authenticated %}
+        {% if not project.published %}
             <div>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">DONATE!</button>
-                </form>
+                <srong>Hello</srong>
+                , {{ project.user }}. Project is still not available to the public. Take your time.
+                <a href="{% url 'GitQuid:editProject' project.slug %}">Edit project</a>
             </div>
-            {% endif %}
-
-
-
         {% else %}
+            <div>
+                <srong>Hey</srong>
+                , {{ project.user }}. Project is up and running. Good luck!
+            </div>
+        {% endif %}
+        <h2>{{ project.name }}</h2>
+        <h4><i>Author's profile:</i>
+            <a href="{% url 'GitQuid:account' project.user.userprofile.slug %}">{{ project.user }}</a>
+        </h4>
+
+        <div id="projectBody">
+            {# Sauce: https://stackoverflow.com/questions/42416123/i-cant-understand-the-django-markdownxs-usage#}
+            {{ project.formatted_markdown|safe }}
+        </div>
+
+        <br>
+        <div id="collected">
+            Collected:{{ project.donations }}£ ({{ percentCollected }}%)
+        </div>
+        <div id="leftToGoal">
+            Only {{ leftToGoal }}£ to go!
+        </div>
+        <div id="goal">
+            Aiming for: {{ project.goal }}£ in total
+            {% if authenticated %}
+                <div>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">DONATE!</button>
+                    </form>
+                </div>
+            {% endif %}
+            {% else %}
             <div>
                 Project is here but it is not published yet.
             </div>
+        </div>
 
-        {% endif %}
-    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block customExtFiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/projectEditing.css' %}">
 {% endblock %}

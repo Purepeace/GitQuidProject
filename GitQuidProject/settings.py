@@ -76,11 +76,13 @@ ROOT_URLCONF = 'GitQuidProject.urls'
 
 markdownRenderer = os.path.join(django.__path__[0], 'form', 'templates')
 
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [TEMPLATE_DIR,
+                 os.path.join(TEMPLATE_DIR, 'markdownx'),
                  markdownRenderer],
         'APP_DIRS': True,
         'OPTIONS': {

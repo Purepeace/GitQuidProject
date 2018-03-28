@@ -1,4 +1,4 @@
-{#{% extends 'GitQuid/base.html' %}#}
+{% extends 'GitQuid/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -17,9 +17,14 @@
         </form>
         {{ form.media }}
     </div>
-    <a href="{% url 'GitQuid:viewProject' project.slug %}">View project</a>
-    <br>
-    <br>
-    <a href="{% url 'GitQuid:browseProjects' %}">Back to projects</a>
 
+{#    <a class="btn-danger" href="{% url 'GitQuid:viewProject' project.slug %}">View project</a>#}
+{#    <br>#}
+{#    <a class="btn-danger" href="{% url 'GitQuid:browseProjects' %}">Back to projects</a>#}
+
+{% endblock %}
+
+{% block customExtFiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/projectEditing.css' %}">
+    {#    <script src="{% static 'GitQuid:js/projectEditing' %}"></script>#}
 {% endblock %}

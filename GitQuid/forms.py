@@ -90,9 +90,9 @@ class AddProjectForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     name = forms.CharField(label="Title of the project:", max_length=Project.maxLen,
                            widget=forms.TextInput(attrs={'placeholder': "(it will be displayed on search page, duh)"}))
-    description = forms.CharField(label="Short description:", max_length=Project.maxLen, required=False,
-                                  widget=forms.TextInput(attrs={
-                                      'placeholder': "This will be displayed on browsing page. Think how you would attract potential donations"}))
+    description = forms.CharField(label="", max_length=Project.maxLen, required=False,
+                                  widget=forms.Textarea(attrs={
+                                      'placeholder': "Short description: This will be displayed on browsing page. Think how you would attract potential donations"}))
     title_image = forms.ImageField(label="Title image:", required=False)
     # category = forms.CheckboxSelectMultiple(label="Category*:")
 
@@ -101,10 +101,11 @@ class ProjectForm(forms.ModelForm):
                                   'placeholder': "Supports markdown! Also it autosaves! (if us lazy cunts will implement ajax lol)(also, succ a ducc, kickstarter)"}))
     goal = forms.FloatField(label="How much Quid do you wanna Git?")
 
+
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Project
-        fields = ('name', 'description', 'title_image', 'body', 'goal')
+        fields = ('name', 'description', 'title_image', 'body', 'goal', 'published')
         widgets = {
 
             'title_image': forms.FileInput(attrs={'class': 'custom-file', 'id': "custom-file"}),
@@ -114,8 +115,8 @@ class ProjectForm(forms.ModelForm):
 
 class DonationForm(forms.ModelForm):
     amount = forms.FloatField(label="Amount")
-    comment = forms.CharField(label="Leave a feedback", max_length=Donation.comMaxLen, required=False,
-                              widget=forms.Textarea())
+    comment = forms.CharField(label="", max_length=Donation.comMaxLen, required=False,
+                              widget=forms.Textarea(attrs={'placeholder':'Leave a comment if you wish!'}))
     class Meta:
         model = Donation
         fields = ('amount', 'comment')
