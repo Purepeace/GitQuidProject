@@ -1,17 +1,19 @@
 form {
-    background: white;
+
     padding: 10px;
 }
-
 #markdownHelp {
-    background: #9fcdff;
+    background: black;
 }
-
 textarea {
     width: 500px;
 }
 
-.viewInfo {
-    background: white;
-    /*#CC3434;*/
+div {
+    color: white;
+}
+
+div{
+    color: #c6c8ca;
+    text-align:center;
 }

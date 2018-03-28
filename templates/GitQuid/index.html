@@ -1,6 +1,6 @@
 {% extends 'GitQuid/base.html' %}
 {% load staticfiles %}
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,15 +12,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 {% load staticfiles %}
@@ -36,84 +37,89 @@
     <body>
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
-      <span class="site-heading-upper text-primary mb-3">Lend A Hand</span>
-      <span class="site-heading-lower">GitQuid</span>
+        <span class="site-heading-upper text-primary mb-3">Lend A Hand</span>
+        <span class="site-heading-lower">GitQuid</span>
     </h1>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Help Your Community</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:index' %}">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:about' %}">About</a>
-            </li>
-            <li class="nav-item px-lg-4">
+        <div class="container">
+            <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Help Your
+                Community</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:index' %}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:about' %}">About</a>
+                    </li>
+                    <li class="nav-item px-lg-4">
 
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' 'name'%}">Projects</a>
-            </li>
-            <li class="nav-item px-lg-4">
-                {% if user.is_authenticated %}
-                {% else %}
-              <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up Here</a>
-                {% endif %}
-            </li>
-          </ul>
+                        <a class="nav-link text-uppercase text-expanded"
+                           href="{% url 'GitQuid:browseProjects' 'name' %}">Projects</a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        {% if user.is_authenticated %}
+                        {% else %}
+                            <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up
+                                Here</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
     <section class="page-section clearfix">
-      <div class="container">
-        <div class="intro">
-          <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="static/images/intro.jpg" alt="">
-          <div class="intro-text left-0 text-center bg-faded p-5 rounded">
-            <h2 class="section-heading mb-4">
-              <span class="section-heading-upper">New Projects</span>
-              <span class="section-heading-lower">Every Week</span>
-            </h2>
-            <p class="mb-3">The world's a hard place. It's good to lend a helping hand every now and then. Want to help out? Need help? Well we'll give you a voice.
-            </p>
-            <div class="intro-button mx-auto">
-              <a class="btn btn-primary btn-xl" href="#">Visit Us</a>
+        <div class="container">
+            <div class="intro">
+                <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="static/images/intro.jpg" alt="">
+                <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-upper">New Projects</span>
+                        <span class="section-heading-lower">Every Week</span>
+                    </h2>
+                    <p class="mb-3">The world's a hard place. It's good to lend a helping hand every now and then. Want
+                        to help out? Need help? Well we'll give you a voice.
+                    </p>
+                    <div class="intro-button mx-auto">
+                        <a class="btn btn-primary btn-xl" href="#">Visit Us</a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <section class="page-section cta">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <div class="cta-inner text-center rounded">
-              <h2 class="section-heading mb-4">
-                <span class="section-heading-upper">Our </span>
-                <span class="section-heading-lower">Guarantee</span>
-              </h2>
-              <p class="mb-0">This platform is devoted to ensuring that budding entrepreneurs always have a rock to build their dreams on, and giving philanthropists a way to help out whenever they can.  </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <div class="cta-inner text-center rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Our </span>
+                            <span class="section-heading-lower">Guarantee</span>
+                        </h2>
+                        <p class="mb-0">This platform is devoted to ensuring that budding entrepreneurs always have a
+                            rock to build their dreams on, and giving philanthropists a way to help out whenever they
+                            can. </p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
-
-
 
 
     <!-- Bootstrap core JavaScript -->
 
 
-  </body>
+    </body>
 
 {% endblock %}
 
