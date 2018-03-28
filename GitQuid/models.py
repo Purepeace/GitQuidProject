@@ -34,7 +34,7 @@ class UserProfile(models.Model):
     # However, projects and donation history should be preserved
     # Anyhow, not a primary concern
     user = models.OneToOneField(User, on_delete=models.PROTECT)
-    picture = models.ImageField(upload_to='profile_images', null=True, blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True, null=True)
 
@@ -63,7 +63,7 @@ class Project(models.Model):
     dateCreated = models.DateTimeField(default=timezone.now())
     datePublished = models.DateTimeField(null=True)
     description = models.CharField(max_length=maxLen, blank=True, default='')
-    title_image = models.ImageField(upload_to='title_images', blank=True, null=True)
+    title_image = models.ImageField(upload_to='title_images/', blank=True)
     body = MarkdownxField(blank=True, default='')
     published = models.BooleanField(default=False)
     # change

@@ -164,6 +164,7 @@ def show_category(request, category_name_slug):
 #
 #
 
+
 #
 #
 # def view_detail(request):
@@ -198,6 +199,8 @@ def browseProjects(request):
     return render(request, 'GitQuid/browseProjects.html', context_dict)
 
 
+
+
 @login_required()
 def addProject(request):
     context_dic = {'form': None}
@@ -209,9 +212,7 @@ def addProject(request):
             f.dateCreated = timezone.now()
             f.save()
             project = form.instance
-
-            # project = Project.objects.filter(id = project.id)
-            # proceed to full project editing page
+            # Proceed to project editing
             return HttpResponseRedirect((reverse('GitQuid:editProject', kwargs={'slug': project.slug})))
         else:
             print(form.errors)
@@ -224,38 +225,28 @@ def addProject(request):
 
 @login_required()
 def editProject(request, slug):
-    context_dict = {'form': None}
+    context_dic = {'form': None, 'project': None}
     # get currently editable project
     project = get_object_or_404(Project, slug=slug)
+    context_dic['project'] = project
     # if user is the author of the project enable editing
     if request.user == project.user:
         if request.method == "POST":
             form = ProjectForm(request.POST, request.FILES, instance=project)
             if form.is_valid():
-                f = form.save(commit=False)
-                # f.user_id = request.user.id
-                # f.dateCreated = timezone.now()
-
-                for key, value in request.POST.items():
-                    print(key, value)
-
-                if 'title_image' in request.FILES:
-                    f.title_image = request.FILES['title_images']
-                    print("labas")
-
-                f.save()
+                form.save()
                 # redirect to the same page
                 return HttpResponseRedirect(reverse('GitQuid:editProject', kwargs={'slug': slug}))
             else:
                 print(form.errors)
         else:
             form = ProjectForm(instance=project)
-            context_dict['form'] = form
+            context_dic['form'] = form
     else:
         # go to projects page
         return HttpResponseRedirect(reverse('GitQuid:browseProjects'))
 
-    return render(request, 'GitQuid/editProject.html', context_dict)
+    return render(request, 'GitQuid/editProject.html', context_dic)
 
 
 def viewProject(request, slug):
@@ -327,8 +318,12 @@ def register(request):
 def account(request, slug):
     context_dic = {'accUser': None, 'curUser': request.user}
     au = get_object_or_404(UserProfile, slug=slug)
+    if au.user:
+        projects_list=Project.objects.filter(user=au.user)
+        context_dic['projects_list'] = projects_list
     context_dic['accUser'] = au.user
     return render(request, 'GitQuid/account.html', context_dic)
+
 
 
 #
