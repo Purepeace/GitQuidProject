@@ -176,7 +176,7 @@ def about(request):
 #
 #
 # @register.simple_tag(takes_context=True)
-def browseProjects(request):
+def browseProjects(request, command='name'):
     projects = Project.objects.all()
     donations = Donation.objects.all()
 
@@ -192,13 +192,26 @@ def browseProjects(request):
     #     p.donations = donation_sum
 
     # Get parameter by which projects are going to be sorted
-    sort = request.GET.get('sort', 'name')
+    #sort = request.GET.get('sort', 'name')
 
     # Get all projects, sorting alphabetically by default
+    context_dic = {}
+    if command == 'date':
+        context_dic = {'projects': projects.order_by("dateCreated")}
+    elif command == 'name':
+        context_dic = {'projects': projects.order_by("name")}
+    elif command == 'rname':
+        context_dic = {'projects': projects.order_by("-name")}
+    elif command == 'rdate':
+        context_dic = {'projects': projects.order_by("-dateCreated")}
+    elif command == 'don':
+        context_dic = {'projects': projects.order_by("donations")}
+    elif command == 'rdon':
+        context_dic = {'projects': projects.order_by("-donations")}
 
-    context_dict = {'projects': projects.order_by(sort)}
+    #context_dict = {'projects': projects.order_by(sort)}
 
-    return render(request, 'GitQuid/browseProjects.html', context_dict)
+    return render(request, 'GitQuid/browseProjects.html', context_dic)
 
 
 @login_required()

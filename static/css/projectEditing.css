@@ -1,14 +1,17 @@
 form {
-    background: #CC3434;
+    background: white;
     padding: 10px;
 }
+
 #markdownHelp {
     background: #9fcdff;
 }
+
 textarea {
     width: 500px;
 }
 
 .viewInfo {
-    background: #CC3434;
+    background: white;
+    /*#CC3434;*/
 }

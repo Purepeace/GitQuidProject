@@ -17,7 +17,7 @@
                 , {{ project.user }}. Project is still not available to the public. Take your time.
                 <a href="{% url 'GitQuid:editProject' project.slug %}">Edit project</a>
             </div>
-        {% else %}
+        {% elif author %}
             <div>
                 <srong>Hey</srong>
                 , {{ project.user }}. Project is up and running. Good luck!

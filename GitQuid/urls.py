@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'^ajax/validate_username/$', views.validate_username, name='validate_username'),
 
     # Projects related urls
-    url(r'^projects/$', views.browseProjects, name='browseProjects'),
+    url(r'^projects/(?P<command>[a-z]+)$', views.browseProjects, name='browseProjects'),
+    #url(r'^projects/$', views.browseProjects, name='browseProjects'),
     url(r'^projects/addProject/$', views.addProject, name='addProject'),
     url(r'^projects/(?P<slug>[-\w]+)/editProject$', views.editProject, name='editProject'),
     url(r'^projects/(?P<slug>[-\w]+)/viewProject$', views.viewProject, name='viewProject'),

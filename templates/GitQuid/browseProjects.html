@@ -15,14 +15,14 @@
         <h1>Browsing Projects</h1>
         {#    <div class="container-fluid"></div>#}
         Sort by:
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=name">A>Z </a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-name">Z>A </a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=date">Oldest first</a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-date">Earliest first</a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=donations">£</a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-donations">£££</a></th>
-        </div>
+{#        <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' 'name' %}">A>Z </a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' 'rname'%}">Z>A </a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' 'date' %}">Oldest first</a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' 'rdate'%}">Earliest first</a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' 'don'%}">£</a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' 'rdon'%}">£££</a>
+{#        </div>#}
 
 
         {#                <div class="btn-group btn-group-toggle" data-toggle="buttons">#}
@@ -63,20 +63,18 @@
         {#                <input type="radio" name="options" id="option3" autocomplete="off"> Radio#}
         {#            </label>#}
         {#        </div>#}
-
+        <br>
+        <br>
         {% for project in projects %}
             <a href="{% url 'GitQuid:viewProject' project.slug %}">
-                <li>
-                    <h3>{{ project }}</h3>
-                    <br/> <img src="/media/{{ project.title_image }}"> <br/>
-                    {#                <div class="boxed">#}
-                    {{ project.body }}<br/>
-                    <small>{{ project.date }}</small>
-                    <br/>
-                    £{{ project.donations }}<br/>
-                    Category: {{ project.category }}<br/>
-                    {#                </div>#}
-                </li>
+                {% if project.title_image %}
+                    <img src="/media/{{ project.title_image }}"> <br>
+                {% endif %}
+                <h3>{{ project.name }}</h3> <br>
+                {{ project.description }}<br>
+                <small>Published: {{ project.date }}</small> <br>
+                £{{ project.donations }}<br>
+                Category: {{ project.category }}<br>
             </a>
         {% endfor %}
 

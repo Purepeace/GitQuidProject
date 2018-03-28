@@ -36,7 +36,7 @@ SECRET_KEY = '(af+$qz*66x==o5p6f2mb=srat@ekj9p7h#*jp7t40^_mx1g1h'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False#True
 
 ALLOWED_HOSTS = ['quidgit.pythonanywhere.com', '127.0.0.1']
 
