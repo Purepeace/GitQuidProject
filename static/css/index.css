@@ -249,7 +249,7 @@ p {
 }
 
 #login_form {
-    position: fixed;
+    position: absolute;
     top: 40px;
     right: 40px;
     font-family: CenturyGothic;
@@ -280,6 +280,14 @@ p {
     /*left: 1050px;*/
     position:fixed;
     top:140px;
+    right:60px;
+
+}
+
+#header {
+
+    position:absolute;
+    top:40px;
     right:60px;
 
 }

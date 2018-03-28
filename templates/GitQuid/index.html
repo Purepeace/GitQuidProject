@@ -22,9 +22,6 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-
-    <script src="{% static 'Libraries/jquery/jquery.js' %}"></script>
-    <script src="{% static 'js/gitquid-jquery.js' %}"></script>
 </head>
 {% load staticfiles %}
 
@@ -110,42 +107,8 @@
       </div>
     </section>
 
-    {% block login_block %}
 
-        {% if user.is_authenticated %}
-            <form action="{% url 'GitQuid:logout' %}">
-                <input type="submit" value="LOGOUT" id="position8">
-            </form>
-            <form action="{% url 'GitQuid:account' user.userprofile.slug %}">
-                <input type="submit" value="MY ACCOUNT" id="position6">
-            </form>
 
-            <form action="{% url 'GitQuid:addProject' %}">
-                <input type="submit" value="ADD PROJECT" id="position5">
-            </form>
-        {% else %}
-            <div>
-
-                <form id="login_form" method="post" action="{% url 'GitQuid:index' %}">
-                    {% csrf_token %}
-                    <div id="position">Username</div>
-                    <input type="text" name="username" value="" size="50" class="tab"/> <br/>
-                    <div id="position2">Password</div>
-                    <br/>
-                    <input type="password" name="password" value="" size="50" class="tab"/> <br/>
-                    <input id="signin" type="submit" value="Sign In"/>
-
-                </form>
-            </div>
-
-        {% endif %}
-    {% endblock %}
-
-    <footer class="footer text-faded text-center py-5">
-      <div class="container">
-        <p class="m-0 small">This website was made by Lab 6 Group C</p>
-      </div>
-    </footer>
 
     <!-- Bootstrap core JavaScript -->
 
@@ -158,5 +121,4 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 
-</html>
 
