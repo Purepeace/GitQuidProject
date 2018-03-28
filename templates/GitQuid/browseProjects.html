@@ -16,12 +16,14 @@
         {#    <div class="container-fluid"></div>#}
         Sort by:
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=name">A>Z </a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-name">Z>A </a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=date">Oldest first</a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-date">Earliest first</a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=donations">£</a></th>
-            <th><a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-donations">£££</a></th>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=name">A>Z </a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-name">Z>A </a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=date">Oldest first</a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-date">Earliest first</a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=donations">£</a>
+            <a class="btn btn-primary" href="{% url 'GitQuid:browseProjects' %}?sort=-donations">£££</a>
+
+            <!-- th tags don't work here!-->
         </div>
 
 
