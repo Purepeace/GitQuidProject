@@ -32,6 +32,9 @@
     {{ category.name }}
 {% endblock %}
 
+{% block header_block %}
+{% endblock %}
+
 {% block body_block %}
     <body>
 
@@ -110,7 +113,6 @@
     {% block login_block %}
 
         {% if user.is_authenticated %}
-            <div align="center">Hi, {{ user.username }}!</div>
             <form action="{% url 'GitQuid:logout' %}">
                 <input type="submit" value="LOGOUT" id="position8">
             </form>

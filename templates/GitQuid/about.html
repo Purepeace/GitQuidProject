@@ -26,6 +26,9 @@
 
   </head>
 
+  {% block header_block %}
+  {% endblock %}
+
   {% block body_block %}
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
@@ -55,7 +58,10 @@
               <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:browseProjects' %}">Projects</a>
             </li>
             <li class="nav-item px-lg-4">
+              {% if user.is_authenticated %}
+                {% else %}
               <a class="nav-link text-uppercase text-expanded" href="{% url 'GitQuid:register' %}">Sign Up Here</a>
+                {% endif %}
             </li>
           </ul>
         </div>
