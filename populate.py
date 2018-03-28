@@ -110,7 +110,7 @@ def populate():
     c15.save()
 
     # User creates a project
-    p = Project(user=u, name="Awesome project", body=loremWithMarkdown,
+    p = Project(user=u, name="Awesome project", body="Money for charity",
                 category=c,  dateCreated=datetime.datetime(2015, 12, 1, 23, 59))
     p.save()
 
