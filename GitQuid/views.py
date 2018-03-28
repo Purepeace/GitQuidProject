@@ -104,35 +104,35 @@ def about(request):
 #     return response
 #
 #
-def show_category(request, category_name_slug):
-    # Create a context dictionary which we can pass
-    # to the template rendering engine.
-    context_dict = {}
-
-    try:
-        # Can we find a category name slug with the given name?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
-        category = Category.objects.get(slug=category_name_slug)
-
-        # Retrieve all of the associated projects.
-        # Note that filter() will return a list of project objects or an empty list
-        projects = Project.objects.filter(category=category)
-
-        # Add our results list to the template context under name projects.
-        context_dict['projects'] = projects
-        # We also add the category object from
-        # the database to the context dictionary.
-        # We'll use theis in the template to verify that the category exists.
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        # we get here if we didn't find the specified category.
-        # don't do anything -
-        # the template will display the "no category" message for us.
-        context_dict['category'] = None
-        context_dict['projects'] = None
-    # Go render the response and return it to the client.
-    return render(request, 'GitQuid/index.html', context_dict)
+# def show_category(request, category_name_slug):
+#     # Create a context dictionary which we can pass
+#     # to the template rendering engine.
+#     context_dict = {}
+#
+#     try:
+#         # Can we find a category name slug with the given name?
+#         # If we can't, the .get() method raises a DoesNotExist exception.
+#         # So the .get() method returns one model instance or raises an exception.
+#         category = Category.objects.get(slug=category_name_slug)
+#
+#         # Retrieve all of the associated projects.
+#         # Note that filter() will return a list of project objects or an empty list
+#         projects = Project.objects.filter(category=category)
+#
+#         # Add our results list to the template context under name projects.
+#         context_dict['projects'] = projects
+#         # We also add the category object from
+#         # the database to the context dictionary.
+#         # We'll use theis in the template to verify that the category exists.
+#         context_dict['category'] = category
+#     except Category.DoesNotExist:
+#         # we get here if we didn't find the specified category.
+#         # don't do anything -
+#         # the template will display the "no category" message for us.
+#         context_dict['category'] = None
+#         context_dict['projects'] = None
+#     # Go render the response and return it to the client.
+#     return render(request, 'GitQuid/index.html', context_dict)
 
 
 # def add_category(request):

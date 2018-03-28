@@ -1,4 +1,4 @@
-{#{% extends 'GitQuid/base.html' %}#}
+{% extends 'GitQuid/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -17,6 +17,12 @@
         </form>
         {{ form.media }}
     </div>
+    <p id="markdownHelp">
+        YOU CAN ADD PICTURES TO YOUR DESCRIPTION BY DRAGGING AND DROPPING THEM ON EDITING AREA
+        How cool is that? (it uses ajax, btw)
+        Did you know that project editing supports html style markdown?
+        <a href="http://bfy.tw/HLzu">More info about markdown here!</a>
+    </p>
     <a href="{% url 'GitQuid:viewProject' project.slug %}">View project</a>
     <br>
     <br>
