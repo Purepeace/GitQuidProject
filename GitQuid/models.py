@@ -29,10 +29,7 @@ class Category(models.Model):
 
 
 class UserProfile(models.Model):
-    # what happens if user wants to delete his profile?
-    # models.PROTECT will preserve data in the db which imo shouldn't be the case
-    # However, projects and donation history should be preserved
-    # Anyhow, not a primary concern
+
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     description = models.TextField(null=True, blank=True)
@@ -50,11 +47,7 @@ class UserProfile(models.Model):
 
 
 class Project(models.Model):
-    # ideally maybe many users (as a team, for instance) could create a many projects
-    # but keeping one user creates many projects is a bit simpler for now
 
-    # null=True shouldn't be here. Something is broken with user detection in add_project view
-    # userProfile = models.ForeignKey(UserProfile, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     maxLen = 200
     name = models.CharField(max_length=maxLen)

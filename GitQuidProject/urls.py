@@ -14,11 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-# !!!
-# Commented everything because:
-# python manage.py sqlmigrate GitQuid 0001 can't run if some django code doesn't compile
-# Pov
-# !!!
 
 # fyi
 # path() is like url() but it doesn't use regex for matching

@@ -58,122 +58,7 @@ def about(request):
     return response
 
 
-#
-#
-# # A helper method
-# def get_server_side_cookie(request, cookie, default_val=None):
-#     val = request.session.get(cookie)
-#     if not val:
-#         val = default_val
-#     return val
-#
-#
-# def visitor_cookie_handler(request):
-#     visits = int(get_server_side_cookie(request, 'visits', '1'))
-#     last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
-#     last_visit_time = datetime.strptime(last_visit_cookie[:-7],
-#                                         '%Y-%m-%d %H:%M:%S')
-#     # If it's been more than a day since the last visit...
-#     if (datetime.now() - last_visit_time).days > 0:
-#         visits = visits + 1
-#         # update the last visit cookie now that we have updated the count
-#         request.session['last_visit'] = str(datetime.now())
-#
-#     else:
-#         visits = 1
-#         # set the last visit cookie
-#         request.session['last_visit'] = last_visit_cookie
-#
-#     # Update/set the visits cookie
-#     request.session['visits'] = visits
-#
-#
-# def about(request):
-#     # prints out whether the method is a GET or a POST
-#     print(request.method)
-#     # prints out the user name, if no one is logged in it prints 'AnonymousUser'
-#     print(request.user)
-#
-#     if request.session.test_cookie_worked():
-#         print("TEST COOKIE WORKED!")
-#         request.session.delete_test_cookie()
-#     context_dict = {}
-#     visitor_cookie_handler(request)
-#     context_dict['visits'] = request.session['visits']
-#     response = render(request, 'GitQuid/about.html', context=context_dict)
-#     return response
-#
-#
-# def show_category(request, category_name_slug):
-#     # Create a context dictionary which we can pass
-#     # to the template rendering engine.
-#     context_dict = {}
-#
-#     try:
-#         # Can we find a category name slug with the given name?
-#         # If we can't, the .get() method raises a DoesNotExist exception.
-#         # So the .get() method returns one model instance or raises an exception.
-#         category = Category.objects.get(slug=category_name_slug)
-#
-#         # Retrieve all of the associated projects.
-#         # Note that filter() will return a list of project objects or an empty list
-#         projects = Project.objects.filter(category=category)
-#
-#         # Add our results list to the template context under name projects.
-#         context_dict['projects'] = projects
-#         # We also add the category object from
-#         # the database to the context dictionary.
-#         # We'll use theis in the template to verify that the category exists.
-#         context_dict['category'] = category
-#     except Category.DoesNotExist:
-#         # we get here if we didn't find the specified category.
-#         # don't do anything -
-#         # the template will display the "no category" message for us.
-#         context_dict['category'] = None
-#         context_dict['projects'] = None
-#     # Go render the response and return it to the client.
-#     return render(request, 'GitQuid/index.html', context_dict)
 
-
-# def add_category(request):
-#     form = CategoryForm()
-#
-#     # A HTTP POST?
-#     if request.method == 'POST':
-#         form = CategoryForm(request.POST)
-#
-#         # Have we been provided with a valid form?
-#         if form.is_valid():
-#             # Save the new category to the database
-#             cat = form.save(commit=True)
-#             print(cat, cat.slug)
-#             # Now that the category is saved
-#             # We colud give a confirnation message
-#             # But since the most recent category added is on the index project
-#             # Then we can direct the user bacl to the index project.
-#             return index(request)
-#         else:
-#             # The supplied form contained errors -
-#             # just print them to the terminal
-#             print(form.errors)
-#
-#     # Will handle the bad form, new form, or no form supplied cases.
-#     # Render the form with error messages(if any).
-#
-#     return render(request, 'GitQuid/add_category.html', {'form': form})
-#
-#
-
-
-#
-#
-# def view_detail(request):
-#     searchWord = request.POST.get('search', '')
-#     return HttpResponse(searchWord)
-
-
-# register = template.Library()
-#
 #
 # @register.simple_tag(takes_context=True)
 def browseProjects(request):
@@ -182,14 +67,6 @@ def browseProjects(request):
 
     # Updated with better solution
 
-    # for project in projects:
-    #     donation_sum = 0
-    #     for donation in donations:
-    #         if project.name == donation.project.name:
-    #             donation_sum += donation.amount
-    #     # Update Project model with sum of donations
-    #     p = Project.objects.get(id=project.id)
-    #     p.donations = donation_sum
 
     # Get parameter by which projects are going to be sorted
     sort = request.GET.get('sort', 'name')

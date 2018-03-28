@@ -83,7 +83,7 @@ class AddProjectForm(forms.ModelForm):
         cat = cleaned_data.get('category')
         if not Category.objects.filter(name=cat):
             raise forms.ValidationError(
-                "No such category exists, you cheeky hacker"
+                "No such category exists"
             )
 
 
@@ -98,7 +98,7 @@ class ProjectForm(forms.ModelForm):
 
     body = MarkdownxFormField(label="Long description:", required=False,
                               widget=forms.TextInput(attrs={
-                                  'placeholder': "Supports markdown! Also it autosaves! (if us lazy cunts will implement ajax lol)(also, succ a ducc, kickstarter)"}))
+                                  'placeholder': "Supports markdown! Also it autosaves! "}))
     goal = forms.FloatField(label="How much Quid do you wanna Git?")
 
 
