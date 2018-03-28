@@ -122,9 +122,6 @@ def populate():
                  category=c3, dateCreated=datetime.datetime(2012, 12, 1, 23, 59))
     p3.save()
 
-    # User ads some pictures to the project
-    Media(project=p, media=b"asdf", tag="picture0").save()
-    Media(project=p, media=b"qwerty", tag="picture1").save()
     # User makes a donation and donation goes to a project
     d = Donation(userProfile=up, project=p, amount=123.99, date=timezone.now(), comment="Good project")
     d.save()
