@@ -67,12 +67,13 @@
         {% for project in projects %}
             <li>
                 <h3>{{ project }}</h3>
-                {{ project.title_image }}
+
+                <br/><img src="/media/{{ project.title_image }}" alt="project image" width="300px" height="200px"><br/>
                 {#                <div class="boxed">#}
-                {{ project.body }}
-                <small>{{ project.date }}</small>
-                £{{ project.donations }}
-                Category: {{ project.category }}
+                Category: {{ project.category }}<br/>
+                {{ project.body }}<br/>
+                £{{ project.donations }}<br/>
+                <small>{{ project.date }}</small><br/>
                 {#                </div>#}
             </li>
         {% endfor %}
