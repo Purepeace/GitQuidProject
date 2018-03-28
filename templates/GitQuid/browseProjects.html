@@ -68,12 +68,12 @@
             <a href="{% url 'GitQuid:viewProject' project.slug %}">
                 <li>
                     <h3>{{ project }}</h3>
-                    {{ project.title_image }}
+                   <br/> <img src="/media/{{ project.title_image }}"> <br/>
                     {#                <div class="boxed">#}
-                    {{ project.body }}
-                    <small>{{ project.date }}</small>
-                    £{{ project.donations }}
-                    Category: {{ project.category }}
+                    {{ project.body }}<br/>
+                    <small>{{ project.date }}</small><br/>
+                    £{{ project.donations }}<br/>
+                    Category: {{ project.category }}<br/>
                     {#                </div>#}
                 </li>
             </a>
